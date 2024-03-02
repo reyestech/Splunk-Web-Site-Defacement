@@ -1,17 +1,17 @@
 # Splunk.Bots
-
 <img src="https://i.imgur.com/WaIk6nd.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h1>Hector M. Reyes  | SOC Analysis </h1>
 </h1> Group 17: Script K™ | Boss of the SOC 2024 </h1>
 <h1> Splunk | Website Defacement </h1>
+<img src="https://i.imgur.com/e95XTbZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
-<h2> Website Defacement </h2>  <br/> 
+<h2> Website Defacement </h2> 
 Today is Alice's first day at the Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.    <br/> 
 
  ### [Alternative Link | Google Docs | BeEF (Browser Exploitation Framework) Runbook](https://docs.google.com/document/d/e/2PACX-1vT3fUiv3aIfETn5UnAPTBZiZy51Tr_gemE1NAvd4zE3l_Dl0G29kL13-zOwEvSmVen152-rFbJfaqG1/pub)
- 
-<img src="https://i.imgur.com/e95XTbZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+<img src="https://i.imgur.com/5uOU9N1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2>Tools Used</h2>  <br/> 
 
@@ -28,8 +28,6 @@ We must examine two pieces of evidence before beginning our investigation.  Firs
 
 - <b> GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - <b> Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
-
-<img src="https://i.imgur.com/5uOU9N1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2> Defacement 101: Find the Suspects (Pictures 1.1 – 1.4)</h2> 
 
@@ -254,8 +252,6 @@ Pictures 3.6  <br/>
 <img src="https://i.imgur.com/JfGoFi8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br/><br/>
 
-<img src="https://i.imgur.com/YHJaYEz.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
-<br/><br/>
 
 How many unique passwords were attempted in the brute force attempt? <br /> 
 - <b> We have two options from here: We can once again stay in the same query, remove the transaction filters, and filter it by events.
