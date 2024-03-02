@@ -1,7 +1,10 @@
-
 # Splunk.Bots
 
 <img src="https://i.imgur.com/WaIk6nd.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+<h1>Hector M. Reyes  | SOC Analysis </h1>
+</h1> Group 17: Script K™ | Boss of the SOC 2024 </h1>
+<h1> Splunk | Website Defacement </h1>
 
 <h2> Website Defacement </h2>  <br/> 
 Today is Alice's first day at the Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.    <br/> 
