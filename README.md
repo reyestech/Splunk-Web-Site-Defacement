@@ -1,12 +1,16 @@
 
 # Splunk.Bots
 
+<img src="https://i.imgur.com/WaIk6nd.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
 <h2> Website Defacement </h2>  <br/> 
 Today is Alice's first day at the Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.    <br/> 
 
  ### [Alternative Link | Google Docs | BeEF (Browser Exploitation Framework) Runbook](
  
  )
+
+ <img src="https://i.imgur.com/Q9cI6ay.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2>Tools Used</h2>  <br/> 
 
@@ -15,13 +19,15 @@ Today is Alice's first day at the Wayne Enterprises' Security Operations Center.
 - <b> VirusTotal | AlientVault </b>
 - <b> md5decrypt | REX Expressions </b>
 
-<img src="https://i.imgur.com/lcl7mD5.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 Pre-Engagement:
 
 We must examine two pieces of evidence before beginning our investigation.  First, we have Alice's journal, which dates from 09/01/16 to 09/13/16. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We get a look at the suspects from the GCPD perspective.
+
 - <b> GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - <b> Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
+
+
 
 <h2> Defacement 101: Find the Suspects (Pictures 1.1 – 1.4)</h2> 
 
@@ -33,17 +39,17 @@ What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imr
 - <b> index=”botsv1” *poisonivy
  Answer: 40.80.148.42
 
-Pictures 1.1
+Pictures 1.1 <br/> 
+<img src="https://i.imgur.com/COhw0VL.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+Pictures 1.2 <br/> 
+<img src="https://i.imgur.com/XejCZz1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
-Pictures 1.2
+Pictures 1.3 <br/> 
+<img src="https://i.imgur.com/eqZ0Tl2.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
-
-Pictures 1.3
-
-
-Pictures 1.4
-
+Pictures 1.4 <br/> 
+<img src="https://i.imgur.com/W14EP4a.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2> Defacement Step 102: Expose the Target (Pictures 1.5-1.6) </h2> 
 What company created the web vulnerability scanner used by Po1s0n1vy? Type the company name.
@@ -51,7 +57,13 @@ What company created the web vulnerability scanner used by Po1s0n1vy? Type the c
 - <b> We continue looking through the “INTERESTING FIELDS” on the left side, in Src_header, which has Po1s0n1vy/40.80.148.42 traffic using a network vulnerability scanner, Acunetix. (Pictures 1.5)  <br /> 
 - <b> Answer: Acunetix
 
-- <b> Pictures 1.5					Pictures 1.6
+Pictures 1.5		<br/>
+<img src="https://i.imgur.com/NktL4Z4.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+
+Pictures 1.6		<br/>
+<img src="https://i.imgur.com/TYFA5e0.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
     
 <h2> Defacement Step 103: Look through the contents (Pictures 1.7) </h2> 
 
@@ -59,8 +71,10 @@ What company created the web vulnerability scanner used by Po1s0n1vy? Type the c
 - <b> We Googled which Content Management Systems (CMS) are most commonly used and saw some examples of what the domain could be using. 
 - <b> WordPress, Magento, and Joomla are some of the most common.
 - <b> Using Ctrl F, we found imreallynotbatman.com is using Joomla when we expanded the src_headers.
-- <b> Answer: Joomla 
-- <b> Pictures 1.7
+- <b> Answer: Joomla
+  
+Pictures 1.7 	<br/>
+<img src="https://i.imgur.com/vsk77i8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 
 <h2> Defacement Step 104: Find the target’s .exe file (Pictures 1.8 – 1.9) </h2> 
@@ -70,25 +84,30 @@ Answer guidance: For example, "notepad.exe" or "favicon.ico"
 - <b> In the field HTTP.http_content_type we see an “image/jpeg” we open it and see a .jpeg associated with it. 
 - Answer: Poisonivy-is-coming-for-you-batman.jpeg
  - <b> 	Pictures 1.8
+
+Pictures 1.8 <br/> 
+<img src="https://i.imgur.com/Sgyscoo.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
  
-Pictures 1.9
+Pictures 1.9 <br/> 
+<img src="https://i.imgur.com/k1ZotyJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
-
-<h2> Defacement Step 105: Target’s FQDN (Pictures 2.0-2.1) </h2> 
+<h2> Defacement Step 105: Target’s FQDN (Pictures 2.0) </h2> 
 
 This attack used dynamic DNS to resolve the malicious IP. What fully qualified domain name (FQDN) is associated with this attack? <br /> 
 - <b> In the same jpeg image file, you can see the FQDN prankglassinebracket.jumpingcrab.com. (Pictures 2.0)
 - <b> Answer: Prankglassinebracket.jumpingcrab.com
-- <b> Pictures 2.0
 
+Pictures 2.0  <br/> 
+<img src="https://i.imgur.com/oMIN67E.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
-<h2> Defacement Step 106: Get the dest_ip (Pictures 2.3) </h2> 
+<h2> Defacement Step 106: Get the dest_ip (Pictures 2.1) </h2> 
 
 What IPv4 address has Po1s0n1vy tied to pre-staged domains to attack Wayne Enterprises? <br /> 
 - <b> Then, we look for “dest_ip” in the text to find the IP Address associated with Wayne Enterprises.
 - <b> Answer: 23.22.63.114
-- <b> Pictures 2.1
 
+Pictures 2.1  <br/> 
+<img src="https://i.imgur.com/Th6eN5T.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2> Defacement Step 108: Brute-force attacks leave a Network trail (Pictures 2.2) </h2>
 
@@ -96,7 +115,9 @@ What IPv4 address is likely attempting a brute-force password attack against imr
 - <b> We can use the dest_ip to query what IP Address has been hitting the server using the query “sourcetype=stream” “ dest_ip” and head to src_ip. We see 99% for IP 23.22.63.114.
 - <b> Enter Search: index="botsv1" sourcetype="stream:HTTP" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd*
 - <b> Answer: 23.22.63.114
-- <b> Pictures 2.2
+
+Pictures 2.2 <br/> 
+<img src="https://i.imgur.com/5rf8PPf.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
  
 <h2> Defacement Step 109: Filenames (Pictures 2.3) </h2> 
 
@@ -106,28 +127,35 @@ Answer guidance: Please include file extension. (For example, "notepad.exe" or "
 - <b> We find 3791.exe in the “fileinfo.filename. " When we open it, we see that Po1s0n1vy uploaded it.
 - <b> Enter Search: index="botsv1" sourcetype="suricata" dest_ip="192.168.250.70" http.http_method=POST .exe
 - <b> Answer: 3791.exe
- - <b> 	Pictures 2.3
 
 
-<h2> Defacement Step 110: Crowd Source your way to a solution (Pictures 2.4-2.5) </h2> 
+Pictures 2.3 <br/> 
+<img src="https://i.imgur.com/HFaDtm7.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+<h2> Defacement Step 110: Crowd Source your way to a solution (Pictures 2.3) </h2> 
 
 What is the MD5 hash of the executable uploaded? 
 - <b> Using AlientVault.com, we input the target’s IP address and examine the traffic details. We then find the SHA-Hash.
 - <b> The command  “|stats values (MD5)” input the IP and see its traffic to verify the details.
 - <b> Answer: AAE3F5A29935E6ABCC2C2754D12A9AF0
 
- 	Pictures 2.4
 
- 	Pictures 2.5
+Pictures 2.4 <br/> 
+<img src="https://i.imgur.com/sRy6nnt.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+
+Pictures 2.5 <br/> 
+<img src="https://i.imgur.com/ITOJ9DC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2> Defacement Step 111: Scan the IPv4 (Pictures 2.6) </h2> 
 
 GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if the initial compromise fails, is to send a spear phishing email with custom malware attached to their intended target. This malware is usually connected to Po1s0n1vys initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware. <br /> 
 - <b> We can use tools like Virustotal.com to scan the attacker’s IP address. This allows us to see the SHA256  found under basic properties.                                                        
 - <b> Answer: 9709473ab351387aab9e816eff3910b9f28a7a70202e250ed46dba8f820f34a8
-- 
-- <b> Pictures 2.6
+
+
+Pictures 2.6 <br/> 
+<img src="https://i.imgur.com/JbHQUel.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 
 <h2> Defacement Step 112: Let's find Steve to buy him a beer (Pictures 2.7-2.8)</h2> 
@@ -140,8 +168,11 @@ Answer guidance: It's not in Splunk!! <br />
 - <b> “Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer.!!!” (Pictures 2.8)
 - <b> Answer: 53 74 65 76 65 20 42 72 61 6e 74 27 73 20 42 65 61 72 64 20 69 73 20 61 20 70 6f 77 65 72 66 75 6c 20 74 68 69 6e 67 2e 20 46 69 6e 64 20 74 68 69 73 20 6d 65 73 73 61 67 65 20 61 6e 64 20 61 73 6b 20 68 69 6d 20 74 6f 20 62 75 79 20 79 6f 75 20 61 20 62 65 65 72 21 21 21 
 
-- <b>  	Pictures 2.7			Pictures 2.8
+Pictures 2.7		<br/> 
+<img src="https://i.imgur.com/4kk3brN.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+Pictures 2.8  <br/> 
+<img src="https://i.imgur.com/iYJYhLn.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 
 <h2> Defacement Step 114: When you are lost, return to basics (Pictures 2.9) </h2> 
@@ -151,8 +182,9 @@ What was the first brute-force password used? <br />
 - <b> Go back to our index= "botsv1 query. " Remove the .exe and replace it with "| table _time form_data" to see the needed detail sorted by event time and date. We can head to the earliest date and see the first password attempted.
 - <b> Enter Search: index="botsv1" sourcetype="stream:http" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd* | table _time form_data
 - <b> Answer: 12345678
-- <b> Pictures 2.9
 
+Pictures 2.9 <br/> 
+<img src="https://i.imgur.com/cLAp26f.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2> Defacement Step 115: Google is your best friend (Pictures 3.0-3.1) </h2> 
 
@@ -164,7 +196,13 @@ One of the passwords in the brute force attack is James Brodsky's favorite Coldp
 - <b> Use “| where userpassword in” ("insert_1", "insert_1", "insert_1", "insert_1"")
 - <b> Enter Search: index="botsv1" sourcetype="stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | eval pwlen=len(userpassword) | search pwlen=6 | where - <b> userpassword in ("clocks", "oceans", "sparks", "shiver", "yellow") | table userpassword
 - <b> Answer: Yellow (Pictures 3.1)
-  - <b> 				Pictures 3.0					 Pictures 3.1			
+
+Pictures 3.0 <br/> 			
+<img src="https://i.imgur.com/XQlhrA9.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+
+Pictures 3.1	<br/> 
+<img src="https://i.imgur.com/OdfFsLm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 
 <h2> Defacement Step 116: Rex expressions (Pictures 3.2-3.3) </h2> 
@@ -177,10 +215,14 @@ What was the correct password for admin access to the content management system 
 - <b> From here, we can open Batman to verify our suspicion. (Pictures 3.3)
 - <b> Enter Search: index="botsv1" sourcetype="stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | rex field=form_data "passwd=(?<userpassword>\w+)" | stats count by userpassword
 - <b> Answer: Batman
-- <b> Pictures 3.2				Pictures 3.3
- 
 
-<h2> Defacement Step 117: The Means (Pictures 3.4-3.8)</h2> 
+Pictures 3.2		<br/> 	
+<img src="https://i.imgur.com/OdfFsLm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+Pictures 3.3  <br/> 
+<img src="https://i.imgur.com/WekBYMr.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+<h2> Defacement Step 117: The Means (Pictures 3.4-3.5)</h2> 
 
 What was the average password length used in the password brute-forcing attempt? <br /> 
 Answer guidance: Round to the closest whole integer. For example, "5" is not "5.23213" <br /> 
@@ -189,9 +231,15 @@ Answer guidance: Round to the closest whole integer. For example, "5" is not "5.
 - <b> Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd 
 - <b> Enter Search: | rex field=form_data "passwd=(?<passwd>\w+)" | eval length=len(passwd) | stats avg(length)
 - <b> Answer: 6
-- - <b> Pictures 3.7
 
-<h2> Defacement Step 118: Round 2 (Pictures 3.8) </h2> 
+Pictures 3.4 <br/> 
+<img src="https://i.imgur.com/32gRWnC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+
+Pictures 3.5 <br/> 
+<img src="https://i.imgur.com/swQisHs.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+<h2> Defacement Step 118: Round 2 (Pictures 3.6) </h2> 
 
 How many seconds elapsed between when the brute force password scan identified the correct password and the compromised login? <br /> 
 Answer guidance: Round to 2 decimal places. <br /> 
@@ -201,10 +249,10 @@ Answer guidance: Round to 2 decimal places. <br />
 - <b> Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd  | rex field=form_data "passwd=(?<passwd>\w+)"  | search passwd=batman | transaction passwd | eval dur=round(duration, 2) | table dur
 - <b> Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd  | rex field=form_data "passwd=(?<passwd>\w+)"  | search passwd=batman  | transaction passwd | eval dur=round(duration, 2)
 - <b> Answer: 92.17
- - <b> 	Pictures 3.8
 
+Pictures 3.6  <br/> 
+<img src="https://i.imgur.com/JfGoFi8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
-<h2> Defacement Step 119: More than one way to do it (Pictures 3.9) </h2> 
 
 How many unique passwords were attempted in the brute force attempt? <br /> 
 - <b> We have two options from here: We can once again stay in the same query, remove the transaction filters, and filter it by events.
@@ -212,7 +260,10 @@ How many unique passwords were attempted in the brute force attempt? <br />
 - <b> Or we can go back to 116 since we searched by the password events in that query and sorted them by count.
 - <b> Instead, in that query, we can go to the “Statistics” bar and see there are 412 events in total. Answer: 412	
 - <b> Pictures 43..9
-  
+
+Pictures 3.7  <br/> 
+<img src="https://i.imgur.com/oPq0f8K.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
 
 Finding Diagrams  <br /> 
     
