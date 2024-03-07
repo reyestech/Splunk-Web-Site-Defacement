@@ -1,7 +1,7 @@
 # Splunk.Bots
 <img src="https://i.imgur.com/WaIk6nd.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
-<h1>Hector M. Reyes  | SOC Analysis </h1>
+<h1>Hector M. Reyes  | SOC Analyst </h1>
 </h1> Group 17: Script K™ | Boss of the SOC 2024 </h1>
 <h1> Splunk | Website Defacement </h1>
 <img src="https://i.imgur.com/e95XTbZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
