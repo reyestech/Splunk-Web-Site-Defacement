@@ -9,9 +9,11 @@
 <h2> Website Defacement </h2> 
 Today is Alice's first day at the Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.    <br/> 
 
- ### [Alternative Link | Google Docs | BeEF (Browser Exploitation Framework) Runbook](https://docs.google.com/document/d/e/2PACX-1vT3fUiv3aIfETn5UnAPTBZiZy51Tr_gemE1NAvd4zE3l_Dl0G29kL13-zOwEvSmVen152-rFbJfaqG1/pub)
+ ### [Alternative Link | Google Docs | Splunk | Website Defacement](https://docs.google.com/document/d/e/2PACX-1vT3fUiv3aIfETn5UnAPTBZiZy51Tr_gemE1NAvd4zE3l_Dl0G29kL13-zOwEvSmVen152-rFbJfaqG1/pub)
 
 <img src="https://i.imgur.com/5uOU9N1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+![giphy](https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88)
 
 <h2>Tools Used</h2>  <br/> 
 
