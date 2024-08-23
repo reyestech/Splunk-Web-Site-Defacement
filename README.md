@@ -5,7 +5,7 @@
 </h1> Group 17: Script K™ | Boss of the SOC 2024 </h1>
 <h1> Splunk | Website Defacement </h1>
 
- ### [Google Docs Link | Splunk: Website Defacement](https://docs.google.com/document/d/1cKHVr2VRcKkuIAlwt_PDoBw95dbydqe2M7iblOqQa00/pub)
+ ### [Google Docs Link | Splunk: Website Defacement](https://docs.google.com/document/d/1yfkpx3jznk6c5z8mrRk0SUCVaO03F9aNqglNuQ8HQSE/pub)
 
 <img src="https://i.imgur.com/e95XTbZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
