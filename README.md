@@ -4,6 +4,9 @@
 <h1>Hector M. Reyes  | SOC Analyst </h1>
 </h1> Group 17: Script K™ | Boss of the SOC 2024 </h1>
 <h1> Splunk | Website Defacement </h1>
+
+ ### [Google Docs Link | Azure Honeynet and Cloud Network Hardening](https://docs.google.com/document/d/1TbSMzlBtGITVFOTaBGqKXjKY0mPG14p5ZWra-Tj8WNk/pub)
+
 <img src="https://i.imgur.com/e95XTbZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2> Website Defacement </h2> 
