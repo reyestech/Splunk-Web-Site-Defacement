@@ -281,11 +281,17 @@ Pictures 3. <br/>
 <br/><br/>
 
 
-# 
-
-Finding Diagrams  <br /> 
+Finding Diagrams  
 
 <img src="https://i.imgur.com/gtZkjEX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+
+
+## Conclusion
+
+This project showcases how Splunk can be utilized to detect and investigate website defacement attacks. Focusing on the subject company as the target, we analyzed logs to identify suspicious activities that resulted in alterations made by a hacker group. The process involved tracking unusual web traffic, identifying malicious IP addresses, and connecting various clues to understand how the attack occurred. 
+
+By working through a realistic and common cybersecurity scenario, we explored Splunk's tools for monitoring threats and responding to incidents. This project emphasizes the importance of staying informed about best practices in cybersecurity and the critical skills required of a Security Analyst: data analysis, investigation of security issues, and the use of leading tools to safeguard digital environments. These are essential competencies for anyone pursuing a role in cybersecurity.
  
 
 
