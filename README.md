@@ -1,8 +1,7 @@
 # Splunk.Bots
 <img src="https://i.imgur.com/WaIk6nd.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
-<h1>Hector M. Reyes  | SOC Analyst </h1>
-</h1> Group 17: Script K™ | Boss of the SOC 2024 </h1>
+<h1>Hector M. Reyes  | SOC Analyst | Boss of the SOC 2024 </h1>
 <h1> Splunk | Website Defacement </h1>
 
  ### [Google Docs Link | Splunk: Website Defacement](https://docs.google.com/document/d/1yfkpx3jznk6c5z8mrRk0SUCVaO03F9aNqglNuQ8HQSE/pub)
@@ -145,7 +144,6 @@ Pictures 2.3 <br/>
 <img src="https://i.imgur.com/HFaDtm7.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 <h2> Defacement Step 110: Crowd Source your way to a solution (Pictures 2.3) </h2> 
-<br/><br/>
 
 What is the MD5 hash of the executable uploaded? 
 - <b> Using AlientVault.com, we input the target’s IP address and examine the traffic details. We then find the SHA-Hash.
@@ -173,7 +171,6 @@ Pictures 2.6 <br/>
 
 
 <h2> Defacement Step 112: Let's find Steve to buy him a beer (Pictures 2.7-2.8)</h2> 
-<br/><br/>
 
 What special hex code is associated with the customized malware discussed in question 111? <br /> 
 Answer guidance: It's not in Splunk!! <br /> 
@@ -284,11 +281,12 @@ Pictures 3. <br/>
 <br/><br/>
 
 
+# 
+
 Finding Diagrams  <br /> 
 
 <img src="https://i.imgur.com/gtZkjEX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
  
-<img src="https://i.imgur.com/8edakAY.png" width="50%" alt="Disk Sanitization Steps"/>
 
 
 
