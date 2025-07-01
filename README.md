@@ -23,8 +23,6 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
   <img src="https://github.com/user-attachments/assets/cbdab132-71d3-4776-b254-bf15536e2354" width="60%" alt="spl43"/>
 </div>
 
----
-
 ## Pre-Engagement
 We need to examine two pieces of evidence before we begin our investigation.  First, we have Alice's journal, which dates from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We get a look at the suspects from the GCPD's point of view.
 - GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
@@ -250,22 +248,23 @@ Pictures 3.6 <br/>
 
 ## Defacement 119: More than one way to do it (Pictures 3.6) 
 How many unique passwords were attempted in the brute force attempt? <br /> 
-- <b> We have two options from here: We can once again stay in the same query, remove the transaction filters, and filter it by events.
-- <b> We can use the “ | stats dc by userpassword.”  
+- We have two options from here: We can once again stay in the same query, remove the transaction filters, and filter it by events.
+- We can use the “ | stats dc by userpassword.”  
 - Or we can go back to 116, since we searched by password events in that query and sorted them by count.
-- <b> Instead, in that query, we can go to the “Statistics” bar and see that there are 412 events in total. Answer: 412	
-- <b> Pictures 43..9
+- Instead, in that query, we can go to the “Statistics” bar and see that there are 412 events in total.
+- Answer: 412	
 
 Pictures 3.7 <br/>
 <img src="https://github.com/user-attachments/assets/ec303263-24e8-4894-bb01-595d3a23cd5c" width="60%" alt="Splunk Defacement - Pictures 3.7"/>
 
+---
 
 ## Conclusion
 This project showcases how Splunk can be utilized to detect and investigate website defacement attacks. Focusing on the subject company as the target, we analyzed logs to identify suspicious activities that resulted in alterations made by a hacker group. The process involved tracking unusual web traffic, identifying malicious IP addresses, and connecting various clues to understand how the attack occurred. 
 
 By working through a realistic and common cybersecurity scenario, we explored Splunk's tools for monitoring threats and responding to incidents. This project emphasizes the importance of staying informed about best practices in cybersecurity and the critical skills required of a Security Analyst: data analysis, investigation of security issues, and the use of leading tools to safeguard digital environments. These are essential competencies for anyone pursuing a role in cybersecurity.
 
-Finding Diagrams <br/>
+> Finding Diagrams
 <div align="center">
   <img src="https://github.com/user-attachments/assets/060ffd6d-d398-45ae-b0fc-fd25c2969820" width="80%" alt="Splunk Defacement - Finding Diagrams"/>
 </div>
