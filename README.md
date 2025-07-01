@@ -1,40 +1,42 @@
 ![Boss of the SOC](https://github.com/user-attachments/assets/523985a4-07ce-4084-a36c-52a2243e502e)
 
-<h1>Hector M. Reyes  | SOC Analyst | Boss of the SOC 2024 </h1>
 <h1> Splunk | Website Defacement </h1>
+Hector M. Reyes  | SOC Analysis | Boss of the SOC 
 
- ### [Google Docs Link | Splunk: Website Defacement](https://docs.google.com/document/d/1yfkpx3jznk6c5z8mrRk0SUCVaO03F9aNqglNuQ8HQSE/pub)
+[Google Docs Link | Splunk: Website Defacement](https://docs.google.com/document/d/1yfkpx3jznk6c5z8mrRk0SUCVaO03F9aNqglNuQ8HQSE/pub)
 
-<img src="https://i.imgur.com/e95XTbZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/aa505c5a-cad1-49ef-96b1-62fa6f2c2272" width="50%" alt="Splunk Image"/>
+</div>
 
-<h2> Website Defacement </h2> 
-Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com, hosted on Wayne Enterprises' IP address space, has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.    <br/> 
+---
 
- ### [Alternative Link | Google Docs | Splunk | Website Defacement](https://docs.google.com/document/d/e/2PACX-1vT3fUiv3aIfETn5UnAPTBZiZy51Tr_gemE1NAvd4zE3l_Dl0G29kL13-zOwEvSmVen152-rFbJfaqG1/pub)
+<h2> Intro to the Web Defacement </h2> 
+Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com, hosted on Wayne Enterprises' IP address space, has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.
 
-<img src="https://i.imgur.com/5uOU9N1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
-
-![giphy](https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88)
-
-<h2>Tools Used</h2>  <br/> 
-
-- <b> Splunk | SIEM (Security Information and Event Management) </b> 
-- <b> Windows Sandbox | Sandboxie-Plus </b>
-- <b> VirusTotal | AlientVault </b>
-- <b> md5decrypt | REX Expressions </b>
+### Tools Used
+> - Splunk | SIEM (Security Information and Event Management)
+> - Windows Sandbox | Sandboxie-Plus
+> - VirusTotal | AlientVault 
+> - md5decrypt | REX Expressions
 
  <img src="https://i.imgur.com/Q9cI6ay.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
- <br/> <br/>
- 
-Pre-Engagement:
 
+
+---
+
+<div align="center">
+  <img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="55%" alt="giphy"/>
+</div>
+
+## Pre-Engagement
 We need to examine two pieces of evidence before we begin our investigation.  First, we have Alice's journal, which dates from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We get a look at the suspects from the GCPD's point of view.
 
 - <b> GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - <b> Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
  <br/><br/>
  
-<h2> Defacement 101: Find the Suspects (Pictures 1.1 – 1.4)</h2> 
+## Defacement 101: Find the Suspects (Pictures 1.1 – 1.4)
 
 What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities? 
 - <b>Using index= "botsv1," we searched for imreallynotbatman.com. (Picture 1.1)
