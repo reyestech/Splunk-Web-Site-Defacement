@@ -1,5 +1,4 @@
-# Splunk.Bots
-<img src="https://i.imgur.com/WaIk6nd.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+![Boss of the SOC](https://github.com/user-attachments/assets/523985a4-07ce-4084-a36c-52a2243e502e)
 
 <h1>Hector M. Reyes  | SOC Analyst | Boss of the SOC 2024 </h1>
 <h1> Splunk | Website Defacement </h1>
