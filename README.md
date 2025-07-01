@@ -33,6 +33,7 @@ We need to examine two pieces of evidence before we begin our investigation.  Fi
 
 <img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="55%" alt="giphy"/>
 
+
 ## Defacement 101: Find the Suspects (Pictures 1.1 – 1.4)
 What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities? 
 - Using index= "botsv1," we searched for imreallynotbatman.com. (Picture 1.1)
@@ -54,7 +55,7 @@ Pictures 1.3 <br/>
 Pictures 1.4 <br/> 
 <img src="https://i.imgur.com/W14EP4a.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
- 
+
 ## Defacement Step 102: Expose the Target (Pictures 1.5-1.6) 
 What company created the web vulnerability scanner used by Po1s0n1vy? Type the company name.
 - We continue looking through the “INTERESTING FIELDS” on the left side, in Src_header, which has Po1s0n1vy/40.80.148.42 traffic using a network vulnerability scanner, Acunetix. (Picture 1.5) 
@@ -65,6 +66,7 @@ Pictures 1.5 <br/>
 
 Pictures 1.6 <br/>
 <img src="https://i.imgur.com/TYFA5e0.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
 
 ## Defacement Step 103: Look through the contents (Pictures 1.7)
 What content management system is imreallynotbatman.com likely using? 
@@ -97,6 +99,7 @@ This attack used dynamic DNS to resolve the malicious IP. What fully qualified d
 Pictures 2.0 <br/>
 <img src="https://i.imgur.com/oMIN67E.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+
 ## Defacement Step 106: Get the dest_ip (Pictures 2.1) 
 What IPv4 address has Po1s0n1vy tied to pre-staged domains to attack Wayne Enterprises? <br /> 
 - Then, we look for “dest_ip” in the text to find the IP Address associated with Wayne Enterprises.
@@ -104,6 +107,7 @@ What IPv4 address has Po1s0n1vy tied to pre-staged domains to attack Wayne Enter
 
 Pictures 2.1 <br/> 
 <img src="https://i.imgur.com/Th6eN5T.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
 
 ## Defacement Step 108: Brute-force attacks leave a Network trail (Pictures 2.2)
 What IPv4 address is likely attempting a brute-force password attack against imreallynotbatman.com? <br /> 
@@ -125,20 +129,19 @@ Answer guidance: Please include the file extension. (For example, "notepad.exe" 
 Pictures 2.3 <br/>
 <img src="https://i.imgur.com/HFaDtm7.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+
 ## Defacement Step 110: Crowd Source your way to a solution (Pictures 2.3)
 What is the MD5 hash of the executable uploaded? 
 - Using AlientVault.com, we input the target’s IP address and examine the traffic details. We then find the SHA-Hash.
 - The command “|stats values (MD5)” inputs the IP and sees its traffic to verify the details.
 - Answer: AAE3F5A29935E6ABCC2C2754D12A9AF0
 
-
 Pictures 2.4 <br/> 
 <img src="https://i.imgur.com/sRy6nnt.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
-
 Pictures 2.5 <br/> 
 <img src="https://i.imgur.com/ITOJ9DC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
-<br/><br/>
+
 
 ## Defacement Step 111: Scan the IPv4 (Pictures 2.6) 
 GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if the initial compromise fails, are to send a spear phishing email with custom malware attached to their intended target. This malware is usually connected to Po1s0n1vys' initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
@@ -147,6 +150,7 @@ GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1
 
 Pictures 2.6 <br/>
 <img src="https://i.imgur.com/JbHQUel.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
 
 ## Defacement Step 112: Let's find Steve to buy him a beer (Pictures 2.7-2.8)
 What special hex code is associated with the customized malware discussed in question 111? <br /> 
@@ -162,7 +166,7 @@ Pictures 2.7 <br/>
 
 Pictures 2.8 <br/> 
 <img src="https://i.imgur.com/iYJYhLn.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
-<br/><br/>
+
 
 ## Defacement Step 114: When you are lost, return to basics (Pictures 2.9) 
 What was the first brute-force password used? 
@@ -173,6 +177,7 @@ What was the first brute-force password used?
 
 Pictures 2.9 <br/> 
 <img src="https://i.imgur.com/cLAp26f.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
 
 ## Defacement Step 115: Google is your best friend (Pictures 3.0-3.1) 
 One of the passwords in the brute force attack is James Brodsky's favorite Coldplay song. We are looking for a six-character word on this one. Which is it? <br /> 
@@ -186,7 +191,6 @@ One of the passwords in the brute force attack is James Brodsky's favorite Coldp
 
 Pictures 3.0 <br/> 			
 <img src="https://i.imgur.com/XQlhrA9.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
-
 
 Pictures 3.1 <br/> 
 <img src="https://i.imgur.com/OdfFsLm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
@@ -208,6 +212,7 @@ Pictures 3.2 <br/>
 Pictures 3.3 <br/> 
 <img src="https://i.imgur.com/WekBYMr.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
+
 ## Defacement Step 117: The Means (Pictures 3.4-3.5)
 What was the average password length used in the password brute-forcing attempt? <br /> 
 Answer guidance: Round to the closest whole integer. For example, "5" is not "5.23213" <br /> 
@@ -223,6 +228,7 @@ Pictures 3.4 <br/>
 Pictures 3.5 <br/>
 <img src="https://i.imgur.com/swQisHs.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
+
 ## Defacement Step 118: Round 2 (Pictures 3.6) 
 How many seconds elapsed between when the brute force password scan identified the correct password and the compromised login? <br /> 
 Answer guidance: Round to 2 decimal places. <br /> 
@@ -236,6 +242,8 @@ Answer guidance: Round to 2 decimal places. <br />
 Pictures 3.6 <br/>
 <img src="https://i.imgur.com/JfGoFi8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
+
+## Defacement 119: More than one way to do it (Pictures 3.6) 
 How many unique passwords were attempted in the brute force attempt? <br /> 
 - <b> We have two options from here: We can once again stay in the same query, remove the transaction filters, and filter it by events.
 - <b> We can use the “ | stats dc by userpassword.”  
@@ -243,11 +251,11 @@ How many unique passwords were attempted in the brute force attempt? <br />
 - <b> Instead, in that query, we can go to the “Statistics” bar and see that there are 412 events in total. Answer: 412	
 - <b> Pictures 43..9
 
-Pictures 3. <br/> 
+Pictures 3.7 <br/> 
 <img src="https://i.imgur.com/oPq0f8K.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
 
-### Conclusion
+## Conclusion
 This project showcases how Splunk can be utilized to detect and investigate website defacement attacks. Focusing on the subject company as the target, we analyzed logs to identify suspicious activities that resulted in alterations made by a hacker group. The process involved tracking unusual web traffic, identifying malicious IP addresses, and connecting various clues to understand how the attack occurred. 
 
 By working through a realistic and common cybersecurity scenario, we explored Splunk's tools for monitoring threats and responding to incidents. This project emphasizes the importance of staying informed about best practices in cybersecurity and the critical skills required of a Security Analyst: data analysis, investigation of security issues, and the use of leading tools to safeguard digital environments. These are essential competencies for anyone pursuing a role in cybersecurity.
