@@ -11,7 +11,7 @@ Hector M. Reyes  | SOC Analysis | Boss of the SOC
 
 ---
 
-<h2> Intro to the Web Defacement </h2> 
+## Intro to the Web Defacement
 Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com, hosted on Wayne Enterprises' IP address space, has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.
 
 ### Tools Used
@@ -20,22 +20,20 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
 > - VirusTotal | AlientVault 
 > - md5decrypt | REX Expressions
 
- <img src="https://i.imgur.com/Q9cI6ay.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/cbdab132-71d3-4776-b254-bf15536e2354" width="60%" alt="spl43"/>
+</div>
 
 ---
-
-<div align="center">
-  <img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="55%" alt="giphy"/>
-</div>
 
 ## Pre-Engagement
 We need to examine two pieces of evidence before we begin our investigation.  First, we have Alice's journal, which dates from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We get a look at the suspects from the GCPD's point of view.
 
 - <b> GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - <b> Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
- <br/><br/>
- 
+
+<img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="55%" alt="giphy"/>
+
 ## Defacement 101: Find the Suspects (Pictures 1.1 – 1.4)
 
 What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities? 
@@ -59,7 +57,7 @@ Pictures 1.4 <br/>
 <img src="https://i.imgur.com/W14EP4a.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 <br/><br/>
  
-<h2> Defacement Step 102: Expose the Target (Pictures 1.5-1.6) </h2> 
+## Defacement Step 102: Expose the Target (Pictures 1.5-1.6) 
 What company created the web vulnerability scanner used by Po1s0n1vy? Type the company name.
 
 - <b> We continue looking through the “INTERESTING FIELDS” on the left side, in Src_header, which has Po1s0n1vy/40.80.148.42 traffic using a network vulnerability scanner, Acunetix. (Picture 1.5)  <br /> 
@@ -73,7 +71,7 @@ Pictures 1.6 <br/>
 <img src="https://i.imgur.com/TYFA5e0.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
  <br/><br/>
     
-<h2> Defacement Step 103: Look through the contents (Pictures 1.7) </h2> 
+## Defacement Step 103: Look through the contents (Pictures 1.7)
 
  What content management system is imreallynotbatman.com likely using? 
 - <b> We Googled which Content Management Systems (CMS) are most commonly used and saw some examples of what the domain could be using. 
