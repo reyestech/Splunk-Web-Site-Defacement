@@ -30,9 +30,9 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
 We need to examine two pieces of evidence before we begin our investigation.  First, we have Alice's journal, which dates from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We get a look at the suspects from the GCPD's point of view.
 - GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
-
 <img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="55%" alt="giphy"/>
 
+---
 
 ## Defacement 101: Find the Suspects (Pictures 1.1 – 1.4)
 What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities? 
@@ -41,19 +41,19 @@ What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imr
 - You can check each IP Address's traffic to see if something fishy pops up. (Picture 1.3)
 - Enter Search: index="botsv1" imreallynotbatman.com
 - index=”botsv1” *poisonivy
- Answer: 40.80.148.42
+- Answer: 40.80.148.42
 
 Pictures 1.1 <br/>
-<img src="https://i.imgur.com/COhw0VL.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+<img src="https://github.com/user-attachments/assets/a1a91d56-9231-4446-974c-0c7eabffa4d6" width="45%" alt="Splunk Defacement - Pictures 1.1"/>
 
 Pictures 1.2 <br/>
-<img src="https://i.imgur.com/XejCZz1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+<img src="https://github.com/user-attachments/assets/e3d90817-1c5d-43c4-9213-5e2389c4efc2" width="65%" alt="Splunk Defacement - Pictures 1.2"/>
 
 Pictures 1.3 <br/>
-<img src="https://i.imgur.com/eqZ0Tl2.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+<img src="https://github.com/user-attachments/assets/b0763a8f-7295-4ca3-adb8-29d343d1ba67" width="65%" alt="Splunk Defacement - Pictures 1.3"/>
 
-Pictures 1.4 <br/> 
-<img src="https://i.imgur.com/W14EP4a.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+Pictures 1.4 <br/>
+<img src="https://github.com/user-attachments/assets/7b1bb136-8e91-43ce-b6b0-86752fffce81" width="70%" alt="Splunk Defacement - Pictures 1.4"/>
 
 
 ## Defacement Step 102: Expose the Target (Pictures 1.5-1.6) 
@@ -62,10 +62,10 @@ What company created the web vulnerability scanner used by Po1s0n1vy? Type the c
 - Answer: Acunetix
 
 Pictures 1.5 <br/>
-<img src="https://i.imgur.com/NktL4Z4.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+<img src="https://github.com/user-attachments/assets/1445a24a-fd6f-4aac-bf3a-6bd8257db97f" width="50%" alt="Splunk Defacement - Pictures 1.5"/>
 
 Pictures 1.6 <br/>
-<img src="https://i.imgur.com/TYFA5e0.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+<img src="https://github.com/user-attachments/assets/87d4c6b0-528d-4768-94ca-834aa2f449ad" width="65%" alt="Splunk Defacement - Pictures 1.6"/>
 
 
 ## Defacement Step 103: Look through the contents (Pictures 1.7)
@@ -74,23 +74,24 @@ What content management system is imreallynotbatman.com likely using?
 - WordPress, Magento, and Joomla are some of the most common.
 - Using Ctrl F, we found imreallynotbatman.com is using Joomla when we expanded the src_headers.
 - Answer: Joomla
-  
+
 Pictures 1.7 <br/>
-<img src="https://i.imgur.com/vsk77i8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+<img src="https://github.com/user-attachments/assets/9c4a4a0e-357c-472b-8889-2f84837dc576" width="55%" alt="Splunk Defacement - Pictures 1.7"/>
+
 
 ## Defacement Step 104: Find the target’s .exe file (Pictures 1.8 – 1.9)
 What is the name of the file that defaced the imreallynotbatman.com website? Please submit only the file name with the extension.
 Answer guidance: For example, "notepad.exe" or "favicon.ico"
 - In the field HTTP. When we see an http_content_type of “image/jpeg”, we open it and see a .jpeg file associated with it. 
 - Answer: Poisonivy-is-coming-for-you-batman.jpeg
-- Pictures 1.8
 
-Pictures 1.8 <br/> 
-<img src="https://i.imgur.com/Sgyscoo.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
- 
+Pictures 1.8 <br/>
+<img src="https://github.com/user-attachments/assets/65676b1a-b556-4974-a7a6-d746be3ef6c5" width="65%" alt="Splunk Defacement - Pictures 1.8"/>
+
 Pictures 1.9 <br/>
-<img src="https://i.imgur.com/k1ZotyJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
- 
+<img src="https://github.com/user-attachments/assets/6140c651-1d52-4433-9672-9b12ac8a7d15" width="65%" alt="Splunk Defacement - Pictures 1.9"/>
+
+
 ## Defacement Step 105: Target’s FQDN (Pictures 2.0) 
 This attack used dynamic DNS to resolve the malicious IP. What fully qualified domain name (FQDN) is associated with this attack? <br /> 
 - In the same JPEG image file, you can see the FQDN prankglassinebracket.jumpingcrab.com. (Pictures 2.0)
@@ -98,6 +99,9 @@ This attack used dynamic DNS to resolve the malicious IP. What fully qualified d
 
 Pictures 2.0 <br/>
 <img src="https://i.imgur.com/oMIN67E.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+Pictures 2.0
+![Splunk Defacement - Pictures 2 0](https://github.com/user-attachments/assets/bfa888cc-31ba-48b2-9970-71ab99ee5609)
 
 
 ## Defacement Step 106: Get the dest_ip (Pictures 2.1) 
@@ -109,6 +113,10 @@ Pictures 2.1 <br/>
 <img src="https://i.imgur.com/Th6eN5T.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 
+Pictures 2.1
+![Splunk Defacement - Pictures 2 1](https://github.com/user-attachments/assets/45dda3ca-d0de-415e-8cf8-55186478d963)
+
+
 ## Defacement Step 108: Brute-force attacks leave a Network trail (Pictures 2.2)
 What IPv4 address is likely attempting a brute-force password attack against imreallynotbatman.com? <br /> 
 - We can use the dest_ip to query what IP Address has been hitting the server using the query “sourcetype=stream” “ dest_ip” and head to src_ip. We see 99% for IP 23.22.63.114.
@@ -117,6 +125,10 @@ What IPv4 address is likely attempting a brute-force password attack against imr
 
 Pictures 2.2 <br/> 
 <img src="https://i.imgur.com/5rf8PPf.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+Pictures 2.2 
+![Splunk Defacement - Pictures 2 2](https://github.com/user-attachments/assets/08f4c7ab-f891-4453-9b5d-a56fbaa6d1b5)
+
 
 ## Defacement Step 109: Filenames (Pictures 2.3)
 What is the name of the executable uploaded by Po1s0n1vy? <br /> 
@@ -130,6 +142,10 @@ Pictures 2.3 <br/>
 <img src="https://i.imgur.com/HFaDtm7.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
 
+Pictures 2.3
+![Splunk Defacement - Pictures 2 3](https://github.com/user-attachments/assets/dd743112-5bf9-4c1e-abd2-74ffcb6c0bf1)
+
+
 ## Defacement Step 110: Crowd Source your way to a solution (Pictures 2.3)
 What is the MD5 hash of the executable uploaded? 
 - Using AlientVault.com, we input the target’s IP address and examine the traffic details. We then find the SHA-Hash.
@@ -139,8 +155,17 @@ What is the MD5 hash of the executable uploaded?
 Pictures 2.4 <br/> 
 <img src="https://i.imgur.com/sRy6nnt.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+Pictures 2.4
+![Splunk Defacement - Pictures 2 4](https://github.com/user-attachments/assets/331ec5b7-1b8a-48f8-8229-f829f78b9b4b)
+
+
+
 Pictures 2.5 <br/> 
 <img src="https://i.imgur.com/ITOJ9DC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+
+Pictures 2.5
+![Splunk Defacement - Pictures 2 5](https://github.com/user-attachments/assets/c24be66d-17a3-491d-a97f-6746cffa6e4f)
 
 
 ## Defacement Step 111: Scan the IPv4 (Pictures 2.6) 
@@ -150,6 +175,13 @@ GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1
 
 Pictures 2.6 <br/>
 <img src="https://i.imgur.com/JbHQUel.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+Pictures 2.6
+![Splunk Defacement - Pictures 2 6](https://github.com/user-attachments/assets/4b8e44d5-d71a-44de-8e3a-48554d77dee5)
+
+
+
+![Splunk Defacement - Pictures 2 5](https://github.com/user-attachments/assets/c24be66d-17a3-491d-a97f-6746cffa6e4f)
 
 
 ## Defacement Step 112: Let's find Steve to buy him a beer (Pictures 2.7-2.8)
@@ -164,8 +196,15 @@ We have the attacker’s IP traffic on Virustotal.com and his username, Botsv1.
 Pictures 2.7 <br/>
 <img src="https://i.imgur.com/4kk3brN.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+Pictures 2.7
+![Splunk Defacement - Pictures 2 7](https://github.com/user-attachments/assets/79c7cc85-19ce-4982-8c07-2beed3a45569)
+
+
 Pictures 2.8 <br/> 
 <img src="https://i.imgur.com/iYJYhLn.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+Pictures 2.8
+![Splunk Defacement - Pictures 2 8](https://github.com/user-attachments/assets/939b7095-4d34-46c5-82e9-fe1b10848a23)
 
 
 ## Defacement Step 114: When you are lost, return to basics (Pictures 2.9) 
@@ -177,6 +216,9 @@ What was the first brute-force password used?
 
 Pictures 2.9 <br/> 
 <img src="https://i.imgur.com/cLAp26f.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+Pictures 2.9
+![Splunk Defacement - Pictures 2 9](https://github.com/user-attachments/assets/5fcbbf5c-9949-448c-ab78-daf65d1a2740)
 
 
 ## Defacement Step 115: Google is your best friend (Pictures 3.0-3.1) 
@@ -192,8 +234,15 @@ One of the passwords in the brute force attack is James Brodsky's favorite Coldp
 Pictures 3.0 <br/> 			
 <img src="https://i.imgur.com/XQlhrA9.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+Pictures 3.0
+![Splunk Defacement - Pictures 3 0](https://github.com/user-attachments/assets/3d2d9308-fbde-4ed2-9265-641e3f0ea2e3)
+
+
 Pictures 3.1 <br/> 
 <img src="https://i.imgur.com/OdfFsLm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+Pictures 3.1
+![Splunk Defacement - Pictures 3 1](https://github.com/user-attachments/assets/d05a8280-ffab-4da7-a8d6-a026f1fc5b10)
 
 
 ## Defacement Step 116: Rex expressions (Pictures 3.2-3.3)
@@ -209,8 +258,16 @@ What was the correct password for admin access to the content management system 
 Pictures 3.2 <br/> 	
 <img src="https://i.imgur.com/OdfFsLm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
 
+
+Pictures 3.2
+![Splunk Defacement - Pictures 3 2](https://github.com/user-attachments/assets/843b75e6-34a7-4a79-8a9c-dbc9d9eb5fb1)
+
+
 Pictures 3.3 <br/> 
 <img src="https://i.imgur.com/WekBYMr.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+Pictures 3.3
+![Splunk Defacement - Pictures 3 3](https://github.com/user-attachments/assets/debc9f50-8bd5-4a38-b3c2-cc32ef7040f6)
 
 
 ## Defacement Step 117: The Means (Pictures 3.4-3.5)
@@ -225,8 +282,15 @@ Answer guidance: Round to the closest whole integer. For example, "5" is not "5.
 Pictures 3.4 <br/> 
 <img src="https://i.imgur.com/32gRWnC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
+Pictures 3.4
+![Splunk Defacement - Pictures 3 4](https://github.com/user-attachments/assets/28b1e057-150b-4320-98d5-a47f9e559b16)
+
+
 Pictures 3.5 <br/>
 <img src="https://i.imgur.com/swQisHs.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+Pictures 3.5
+![Splunk Defacement - Pictures 3 5](https://github.com/user-attachments/assets/c0bb6fd8-4ae2-4650-9c3b-b1e19f561669)
 
 
 ## Defacement Step 118: Round 2 (Pictures 3.6) 
@@ -242,6 +306,9 @@ Answer guidance: Round to 2 decimal places. <br />
 Pictures 3.6 <br/>
 <img src="https://i.imgur.com/JfGoFi8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
+Pictures 3.6
+![Splunk Defacement - Pictures 3 6](https://github.com/user-attachments/assets/aef083df-24eb-4b5d-9d5a-50193ebb0b79)
+
 
 ## Defacement 119: More than one way to do it (Pictures 3.6) 
 How many unique passwords were attempted in the brute force attempt? <br /> 
@@ -254,6 +321,9 @@ How many unique passwords were attempted in the brute force attempt? <br />
 Pictures 3.7 <br/> 
 <img src="https://i.imgur.com/oPq0f8K.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
+Pictures 3.7
+![Splunk Defacement - Pictures 3 7](https://github.com/user-attachments/assets/ec303263-24e8-4894-bb01-595d3a23cd5c)
+
 
 ## Conclusion
 This project showcases how Splunk can be utilized to detect and investigate website defacement attacks. Focusing on the subject company as the target, we analyzed logs to identify suspicious activities that resulted in alterations made by a hacker group. The process involved tracking unusual web traffic, identifying malicious IP addresses, and connecting various clues to understand how the attack occurred. 
@@ -263,6 +333,9 @@ By working through a realistic and common cybersecurity scenario, we explored Sp
 > Finding Diagrams  
 
 <img src="https://i.imgur.com/gtZkjEX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> 
+
+![Splunk Defacement - Finding Diagrams](https://github.com/user-attachments/assets/060ffd6d-d398-45ae-b0fc-fd25c2969820)
+
 
 
 
