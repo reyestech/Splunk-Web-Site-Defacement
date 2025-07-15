@@ -26,7 +26,7 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
 </div>
 
 ## Pre-Engagement
-We need to examine two pieces of evidence before we begin our investigation.  First, we have Alice's journal, which dates from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We get a look at the suspects from the GCPD's point of view.
+We need to examine two pieces of evidence before we begin our investigation.  First, we have Alice's journal, which dates from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We get a glimpse into the suspects from the GCPD's perspective.
 - GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
 
@@ -84,7 +84,7 @@ Picture 1.7 <br/>
 ## Defacement Step 104: Find the target’s .exe file (Picture 1.8 – 1.9)
 What is the name of the file that defaced the imreallynotbatman.com website? Please submit only the file name with the extension.
 Answer guidance: For example, "notepad.exe" or "favicon.ico"
-- In the field HTTP. When we see an http_content_type of “image/jpeg”, we open it and see a .jpeg file associated with it. 
+- In the field HTTP. When we see an HTTP content type of “image/jpeg”, we open it and see a .jpeg file associated with it. 
 - Answer: Poisonivy-is-coming-for-you-batman.jpeg
 
 Picture 1.8 <br/>
@@ -95,7 +95,7 @@ Picture 1.9 <br/>
 
 
 ## Defacement Step 105: Target’s FQDN (Picture 2.0) 
-This attack used dynamic DNS to resolve the malicious IP. What fully qualified domain name (FQDN) is associated with this attack? <br /> 
+This attack utilized dynamic DNS to resolve the malicious IP address. What fully qualified domain name (FQDN) is associated with this attack? <br /> 
 - In the same JPEG image file, you can see the FQDN prankglassinebracket.jumpingcrab.com. (Picture 2.0)
 - Answer: Prankglassinebracket.jumpingcrab.com
 
@@ -114,7 +114,7 @@ Picture 2.1 <br/>
 
 ## Defacement Step 108: Brute-force attacks leave a Network trail (Picture 2.2)
 What IPv4 address is likely attempting a brute-force password attack against imreallynotbatman.com? <br /> 
-- We can use the dest_ip to query what IP Address has been hitting the server using the query “sourcetype=stream” “ dest_ip” and head to src_ip. We see 99% for IP 23.22.63.114.
+- We can use the dest_ip to query what IP Address has been hitting the server using the query “sourcetype=stream” “ dest_ip” and head to the src_ip. We see 99% for IP 23.22.63.114.
 - Enter Search: index="botsv1" sourcetype="stream:HTTP" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd*
 - Answer: 23.22.63.114
 
@@ -124,7 +124,7 @@ Picture 2.2 <br/>
 
 ## Defacement Step 109: Filenames (Picture 2.3)
 What is the name of the executable uploaded by Po1s0n1vy? <br /> 
-Answer guidance: Please include the file extension. (For example, "notepad.exe" or "favicon.ico") <br /> 
+Please ensure that you include the file extension. (For example, "notepad.exe" or "favicon.ico") <br /> 
 - Since we already have Po1s0n1vy’s network traffic, we can filter it by adding “.exe” to our index.
 - We find 3791.exe in the “fileinfo.filename." When we open it, we see that Po1s0n1vy uploaded it.
 - Enter Search: index="botsv1" sourcetype="suricata" dest_ip="192.168.250.70" http.http_method=POST .exe
@@ -136,7 +136,7 @@ Picture 2.3 <br/>
 
 ## Defacement Step 110: Crowd Source your way to a solution (Picture 2.3)
 What is the MD5 hash of the executable uploaded? 
-- Using AlientVault.com, we input the target’s IP address and examine the traffic details. We then find the SHA-Hash.
+- Using AlienVault.com, we input the target’s IP address and examine the traffic details. We then find the SHA-Hash.
 - The command “|stats values (MD5)” inputs the IP and sees its traffic to verify the details.
 - Answer: AAE3F5A29935E6ABCC2C2754D12A9AF0
 
@@ -148,7 +148,7 @@ Picture 2.5 <br/>
 
 
 ## Defacement Step 111: Scan the IPv4 (Picture 2.6) 
-GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if the initial compromise fails, are to send a spear phishing email with custom malware attached to their intended target. This malware is usually connected to Po1s0n1vys' initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
+GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if the initial compromise fails, are to send a spear phishing email with custom malware attached to their intended target. This malware is typically associated with Po1s0n1vys' initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
 - We can use tools like Virustotal.com to scan the attacker’s IP address. This allows us to see the SHA256 found under the basic properties.                                                 
 - Answer: 9709473ab351387aab9e816eff3910b9f28a7a70202e250ed46dba8f820f34a8
 
@@ -264,7 +264,7 @@ Picture 3.7 <br/>
 ## Conclusion
 This project showcases how Splunk can be utilized to detect and investigate website defacement attacks. Focusing on the subject company as the target, we analyzed logs to identify suspicious activities that resulted in alterations made by a hacker group. The process involved tracking unusual web traffic, identifying malicious IP addresses, and connecting various clues to understand how the attack occurred. 
 
-By working through a realistic and common cybersecurity scenario, we explored Splunk's tools for monitoring threats and responding to incidents. This project emphasizes the importance of staying informed about best practices in cybersecurity and the critical skills required of a Security Analyst: data analysis, investigation of security issues, and the use of leading tools to safeguard digital environments. These are essential competencies for anyone pursuing a role in cybersecurity.
+By working through a realistic and common cybersecurity scenario, we explored Splunk's tools for monitoring threats and responding to incidents. This project emphasizes the importance of staying informed about best practices in cybersecurity and the critical skills required of a security analyst, including data analysis, investigation of security issues, and the use of leading tools to safeguard digital environments. These are essential competencies for anyone pursuing a role in cybersecurity.
 
 > Finding Diagrams
 <div align="center">
