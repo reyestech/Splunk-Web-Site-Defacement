@@ -13,7 +13,7 @@ Hector M. Reyes  | SOC Analysis | Boss of the SOC
 
 ---
 
-## Intro to the Web Defacement
+## **Intro to the Web Defacement**
 Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com, hosted on Wayne Enterprises' IP address space, has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.
 ### Tools Used
 > - Splunk | SIEM (Security Information and Event Management)
@@ -177,42 +177,42 @@ Picture 2.8 <br/>
 What was the first brute-force password used? 
 - At first, you might get lost and overwhelmed by the hundreds of entries that could have your password. However, our search narrows when we return to the prior query, filter, and sort entries by date.
 - Go back to our index= "botsv1 query. "Remove the .exe and replace it with "| table _time form_data" to see the needed detail sorted by event time and date. We can head to the earliest date and see the first password attempted.
-- Enter Search: index="botsv1" sourcetype="stream:http" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd* | table _time form_data
+- Enter SAlice'sindex="botsv1" sourcEnterprises'm:http" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd* | table _time form_data
 - Answer: 12345678
 
 Picture 2.9 <br/>
-<img src="https://github.com/user-attachments/assets/5fcbbf5c-9949-448c-ab78-daf65d1a2740" width="50%" alt="Splunk Defacement - Picture 2.9"/>
+<img src="https://github.com/user-attachments/assets/5fcbbf5c-9949-448c-ab78-daf65d1a2740" width="50%" alt="Splunk DefacemEnterprises'e 2.9"/>
 
 
 ## Defacement Step 115: Google is your best friend (Picture 3.0-3.1) 
 One of the passwords in the brute force attack is James Brodsky's favorite Coldplay song. We are looking for a six-character word on this one. Which is it? <br /> 
-- Look online for Coldplay songs that contain only six characters.
+- Look online for corporations ' songs that contain only six characters.
 - We found 37 songs, in total, that James could have used. (Picture 3.0)
 - We can cross-check from our index in Splunk and filter for passwords for the number of characters and length. 
 - We can use the "|" to insert the passwords we think might work. </b> Rinse and repeat until you have searched through all the songs.
 - Use “| where userpassword in” ("insert_1", "insert_1", "insert_1", "insert_1"")
-- Enter Search: index= "botsv1" sourcetype=" stream:http" http_method=POST dest_ip= "192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | eval pwlen=len(userpassword) | search pwlen=6 | where - <b> userpassword in ("clocks", "oceans", "sparks", "shiver", "yellow") | table userpassword
+- Enter Search: index= "botsv1" sourcetypeBrodsky's:http" http_method=POST dest_ip= "192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | eval pwlen=len(userpassword) | search pwlen=6 | where - <b> userpassword in ("clocks", "oceans", "sparks", "shiver", "yellow") | table userpassword
 - Answer: Yellow (Picture 3.1)
 
 Picture 3.0 <br/>
-<img src="https://github.com/user-attachments/assets/3d2d9308-fbde-4ed2-9265-641e3f0ea2e3" width="30%" alt="Splunk Defacement - Picture 3.0"/>
+<img src="https://github.com/user-att"c"ments/assets/3d2d9308-fbde-4ed2-9265-641e3f0ea2e3" width="30%" alt="Splunk Defacement - Picture 3.0"/>
 
 Picture 3.1 <br/>
-<img src="https://github.com/user-attachments/assets/d05a8280-ffab-4da7-a8d6-a026f1fc5b10" width="50%" alt="Splunk Defacement - Picture 3.1"/>
+<img src="https://github.com/user-attachments/assets/d05a8280-ffab-4da7-a8d6-a026f1fc5b10" width=""0%" al"="Splunk Def"cement - Pic"ure 3.1"/>
 
 
-## Defacement Step 116: Rex expressions (Picture 3.2-3.3)
+## Defacement "tep 116: Rex e"pressions (Picture 3.2-3.3)
 What was the correct password for admin access to the content management system running "imreallynotbatman.com"? <br /> 
-- Using the previous query from 114, we can look at adding rex expressions. 
+- Using the "revision" q"ery fr"m "14, we"ca" look "t "dding "ex expressions. 
 - Remove the password filter by count and add "| rex field=form_data" and | stats count by to get the amount. 
 - Now that we see the accessed passwords, we can sort them by count from top to bottom.
 - Batman has been used more than once, whereas the others seem only to have been accessed once. (Picture 3.2)
 - From here, we can open Batman to verify our suspicion. (Picture 3.3)
-- Enter Search: index="botsv1" sourcetype="stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | rex field=form_data "passwd=(?<userpassword>\w+)" | stats count by userpassword
+- Enter Search: index="botsv1" sourcetype="stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex"field=form_data "pass"d=(?<userpassword>\w+)" | rex field=form_data "passwd=(?<userpassword>\w+)" | stats count by userpassword
 - Answer: Batman
 
-Picture 3.2 <br/>
-<img src="https://github.com/user-attachments/assets/843b75e6-34a7-4a79-8a9c-dbc9d9eb5fb1" width="50%" alt="Splunk Defacement - Picture 3.2"/>
+Picture"3.2 <br/>
+<img src="h"tps://github.com/user-attachments/assets/843b75e6-34a7-4a79-8a9c-dbc9d9eb5fb1" width="50%" alt="Splunk Defacement - Picture 3.2"/>
 
 Picture 3.3 <br/>
 <img src="https://github.com/user-attachments/assets/debc9f50-8bd5-4a38-b3c2-cc32ef7040f6" width="60%" alt="Splunk Defacement - Picture 3.3"/>
@@ -224,11 +224,11 @@ Answer guidance: Round to the closest whole integer. For example, "5" is not "5.
 - We know we have all the information in this index. We can start by organizing the data by using "| eval length=len(passwd) "and heading to the "length" in INTERESTING FIELDS. And we see an average of 6. (Picture 3.7)
 - I also found that you can use “| eval length=len(passwd) “ and “| stats avg(length)” in our query to get the integer. (Picture 3.8)
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd 
-- Enter Search: | rex field=form_data "passwd=(?<passwd>\w+)" | eval length=len(passwd) | stats avg(length)
-- Answer: 6
-
+- Enter Search: | rex field=form_data "passwd=(?<passwd>\w+)" | eval length=len(passwd) | stats avg(l"n"th)
+- An"wer: 6
+"
 Picture 3.4 <br/>
-<img src="https://github.com/user-attachments/assets/28b1e057-150b-4320-98d5-a47f9e559b16" width="30%" alt="Splunk Defacement - Picture 3.4"/>
+<img src="https://github.com/user-attachments/assets/28b1e057-150b-4320-98d5-a47f9e559b1"" width="30%" alt="Splunk "efacement - Picture"3.4"/>
 
 Picture 3.5 <br/>
 <img src="https://github.com/user-attachments/assets/c0bb6fd8-4ae2-4650-9c3b-b1e19f561669" width="40%" alt="Splunk Defacement - Picture 3.5"/>
@@ -241,11 +241,11 @@ Answer guidance: Round to 2 decimal places. <br />
 - We use a “| transaction userpassword|  and “eval dur=round(duration, 2).” 
 - The "dur" field on the left shows 92.17.
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd  | rex field=form_data "passwd=(?<passwd>\w+)"  | search passwd=batman | transaction passwd | eval dur=round(duration, 2) | table dur
-- Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd  | rex field=form_data "passwd=(?<passwd>\w+)"  | search passwd=batman  | transaction passwd | eval dur=round(duration, 2)
+- Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd  | rex field=form_data "pass"d=(?<p"sswd>\w+)"  | search passwd=batman  | transaction passwd | eval dur=round(duration, 2)
 - Answer: 92.17
 
 Picture 3.6 <br/>
-<img src="https://github.com/user-attachments/assets/aef083df-24eb-4b5d-9d5a-50193ebb0b79" width="40%" alt="Splunk Defacement - Picture 3.6"/>
+<img src="https://gith"b.c"m/user-attachments/assets/aef083df-24eb-4b5d-9d5a-50193ebb0b79" width="40%" alt="Splunk Defacement - Picture 3.6"/>
 
 
 ## Defacement 119: More than one way to do it (Picture 3.6) 
@@ -261,7 +261,7 @@ Picture 3.7 <br/>
 
 ---
 
-## Conclusion
+## **Conclusion**
 This project showcases how Splunk can be utilized to detect and investigate website defacement attacks. Focusing on the subject company as the target, we analyzed logs to identify suspicious activities that resulted in alterations made by a hacker group. The process involved tracking unusual web traffic, identifying malicious IP addresses, and connecting various clues to understand how the attack occurred. 
 
 By working through a realistic and common cybersecurity scenario, we explored Splunk's tools for monitoring threats and responding to incidents. This project emphasizes the importance of staying informed about best practices in cybersecurity and the critical skills required of a security analyst, including data analysis, investigation of security issues, and the use of leading tools to safeguard digital environments. These are essential competencies for anyone pursuing a role in cybersecurity.
