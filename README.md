@@ -26,7 +26,7 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
 </div>
 
 ## Pre-Engagement
-We need to examine two pieces of evidence before we begin our investigation.  First, we have Alice's journal, which dates from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We get a glimpse into the suspects from the GCPD's perspective.
+We need to examine two pieces of evidence before we begin our investigation.  First, we have Alice's journal, which dates from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the "Mission Document." Here, you can learn about our APT group, Poison Ivy.  We gain insight into the suspects from the GCPD's perspective.
 - GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
 
@@ -114,7 +114,7 @@ Picture 2.1 <br/>
 
 ## Defacement Step 108: Brute-force attacks leave a Network trail (Picture 2.2)
 What IPv4 address is likely attempting a brute-force password attack against imreallynotbatman.com? <br /> 
-- We can use the dest_ip to query what IP Address has been hitting the server using the query “sourcetype=stream” “ dest_ip” and head to the src_ip. We see 99% for IP 23.22.63.114.
+- We can use the dest_ip to query what IP Address has been hitting the server using the query "sourcetype=stream" "dest_ip" and head to the src_ip. We see 99% for IP 23.22.63.114.
 - Enter Search: index="botsv1" sourcetype="stream:HTTP" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd*
 - Answer: 23.22.63.114
 
@@ -125,8 +125,8 @@ Picture 2.2 <br/>
 ## Defacement Step 109: Filenames (Picture 2.3)
 What is the name of the executable uploaded by Po1s0n1vy? <br /> 
 Please ensure that you include the file extension. (For example, "notepad.exe" or "favicon.ico") <br /> 
-- Since we already have Po1s0n1vy’s network traffic, we can filter it by adding “.exe” to our index.
-- We find 3791.exe in the “fileinfo.filename." When we open it, we see that Po1s0n1vy uploaded it.
+- Since we already have Po1s0n1vy's network traffic, we can filter it by adding ".exe" to our index.
+- We find 3791.exe in the "fileinfo.filename." When we open it, we see that Po1s0n1vy uploaded it.
 - Enter Search: index="botsv1" sourcetype="suricata" dest_ip="192.168.250.70" http.http_method=POST .exe
 - Answer: 3791.exe
 
@@ -136,8 +136,8 @@ Picture 2.3 <br/>
 
 ## Defacement Step 110: Crowd Source your way to a solution (Picture 2.3)
 What is the MD5 hash of the executable uploaded? 
-- Using AlienVault.com, we input the target’s IP address and examine the traffic details. We then find the SHA-Hash.
-- The command “|stats values (MD5)” inputs the IP and sees its traffic to verify the details.
+- Using AlienVault.com, we input the target's IP address and examine the traffic details. We then find the SHA-Hash.
+- The command "|stats values (MD5)" inputs the IP and sees its traffic to verify the details.
 - Answer: AAE3F5A29935E6ABCC2C2754D12A9AF0
 
 Picture 2.4 <br/>
@@ -149,7 +149,7 @@ Picture 2.5 <br/>
 
 ## Defacement Step 111: Scan the IPv4 (Picture 2.6) 
 GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if the initial compromise fails, are to send a spear phishing email with custom malware attached to their intended target. This malware is typically associated with Po1s0n1vys' initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
-- We can use tools like Virustotal.com to scan the attacker’s IP address. This allows us to see the SHA256 found under the basic properties.                                                 
+- We can use tools like Virustotal.com to scan the attacker's IP address. This allows us to see the SHA256 found under the basic properties.                                                 
 - Answer: 9709473ab351387aab9e816eff3910b9f28a7a70202e250ed46dba8f820f34a8
 
 Picture 2.6 <br/>
@@ -159,10 +159,10 @@ Picture 2.6 <br/>
 ## Defacement Step 112: Let's find Steve to buy him a beer (Picture 2.7-2.8)
 What special hex code is associated with the customized malware discussed in question 111? <br /> 
 Answer guidance: It's not in Splunk!! <br /> 
-We have the attacker’s IP traffic on Virustotal.com and his username, Botsv1.
+We have the attacker's IP traffic on Virustotal.com, as well as his username, Botsv1.
 - We can search and control F to find hex codes and Botsv1s and compare them to the traffic and timeline the code should have been made. (Picture 2.7)
 - Using Cyberchef, we insert the hex code and output, 
-- “Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer.!!!” (Picture 2.8)
+- "Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer.!!!" (Picture 2.8)
 - Answer: 53 74 65 76 65 20 42 72 61 6e 74 27 73 20 42 65 61 72 64 20 69 73 20 61 20 70 6f 77 65 72 66 75 6c 20 74 68 69 6e 67 2e 20 46 69 6e 64 20 74 68 69 73 20 6d 65 73 73 61 67 65 20 61 6e 64 20 61 73 6b 20 68 69 6d 20 74 6f 20 62 75 79 20 79 6f 75 20 61 20 62 65 65 72 21 21 21 
 
 Picture 2.7 <br/>
@@ -176,7 +176,7 @@ Picture 2.8 <br/>
 ## Defacement Step 114: When you are lost, return to basics (Picture 2.9) 
 What was the first brute-force password used? 
 - At first, you might get lost and overwhelmed by the hundreds of entries that could have your password. However, our search narrows when we return to the prior query, filter, and sort entries by date.
-- Go back to our index= "botsv1 query. " Remove the .exe and replace it with "| table _time form_data" to see the needed detail sorted by event time and date. We can head to the earliest date and see the first password attempted.
+- Go back to our index= "botsv1 query. "Remove the .exe and replace it with "| table _time form_data" to see the needed detail sorted by event time and date. We can head to the earliest date and see the first password attempted.
 - Enter Search: index="botsv1" sourcetype="stream:http" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd* | table _time form_data
 - Answer: 12345678
 
@@ -189,9 +189,9 @@ One of the passwords in the brute force attack is James Brodsky's favorite Coldp
 - Look online for Coldplay songs that contain only six characters.
 - We found 37 songs, in total, that James could have used. (Picture 3.0)
 - We can cross-check from our index in Splunk and filter for passwords for the number of characters and length. 
-- We can use the “|” to insert the passwords we think might work. </b> Rinse and repeat until you have searched through all the songs.
+- We can use the "|" to insert the passwords we think might work. </b> Rinse and repeat until you have searched through all the songs.
 - Use “| where userpassword in” ("insert_1", "insert_1", "insert_1", "insert_1"")
-- Enter Search: index="botsv1" sourcetype=" stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | eval pwlen=len(userpassword) | search pwlen=6 | where - <b> userpassword in ("clocks", "oceans", "sparks", "shiver", "yellow") | table userpassword
+- Enter Search: index= "botsv1" sourcetype=" stream:http" http_method=POST dest_ip= "192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | eval pwlen=len(userpassword) | search pwlen=6 | where - <b> userpassword in ("clocks", "oceans", "sparks", "shiver", "yellow") | table userpassword
 - Answer: Yellow (Picture 3.1)
 
 Picture 3.0 <br/>
@@ -204,7 +204,7 @@ Picture 3.1 <br/>
 ## Defacement Step 116: Rex expressions (Picture 3.2-3.3)
 What was the correct password for admin access to the content management system running "imreallynotbatman.com"? <br /> 
 - Using the previous query from 114, we can look at adding rex expressions. 
-- Remove the password filter by count and add “| rex field=form_data” and | stats count by to get the amount. 
+- Remove the password filter by count and add "| rex field=form_data" and | stats count by to get the amount. 
 - Now that we see the accessed passwords, we can sort them by count from top to bottom.
 - Batman has been used more than once, whereas the others seem only to have been accessed once. (Picture 3.2)
 - From here, we can open Batman to verify our suspicion. (Picture 3.3)
@@ -221,7 +221,7 @@ Picture 3.3 <br/>
 ## Defacement Step 117: The Means (Picture 3.4-3.5)
 What was the average password length used in the password brute-forcing attempt? <br /> 
 Answer guidance: Round to the closest whole integer. For example, "5" is not "5.23213" <br /> 
-- We know we have all the information in this index. We can start by organizing the data by using “| eval length=len(passwd) “ and heading to the “length” in INTERESTING FIELDS. And we see an average of 6. (Picture 3.7)
+- We know we have all the information in this index. We can start by organizing the data by using "| eval length=len(passwd) "and heading to the "length" in INTERESTING FIELDS. And we see an average of 6. (Picture 3.7)
 - I also found that you can use “| eval length=len(passwd) “ and “| stats avg(length)” in our query to get the integer. (Picture 3.8)
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd 
 - Enter Search: | rex field=form_data "passwd=(?<passwd>\w+)" | eval length=len(passwd) | stats avg(length)
@@ -237,9 +237,9 @@ Picture 3.5 <br/>
 ## Defacement Step 118: Round 2 (Picture 3.6) 
 How many seconds elapsed between when the brute force password scan identified the correct password and the compromised login? <br /> 
 Answer guidance: Round to 2 decimal places. <br /> 
-- Search for the password “batman” and filter the transaction and event duration filters. </b>
+- Search for the password "batman" and filter the transaction and event duration filters. </b>
 - We use a “| transaction userpassword|  and “eval dur=round(duration, 2).” 
-- The “dur” field on the left shows 92.17.
+- The "dur" field on the left shows 92.17.
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd  | rex field=form_data "passwd=(?<passwd>\w+)"  | search passwd=batman | transaction passwd | eval dur=round(duration, 2) | table dur
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd  | rex field=form_data "passwd=(?<passwd>\w+)"  | search passwd=batman  | transaction passwd | eval dur=round(duration, 2)
 - Answer: 92.17
@@ -251,9 +251,9 @@ Picture 3.6 <br/>
 ## Defacement 119: More than one way to do it (Picture 3.6) 
 How many unique passwords were attempted in the brute force attempt? <br /> 
 - We have two options from here: We can once again stay in the same query, remove the transaction filters, and filter it by events.
-- We can use the “ | stats dc by userpassword.”  
+- We can use the "| stats dc by userpassword."  
 - Or we can go back to 116, since we searched by password events in that query and sorted them by count.
-- Instead, in that query, we can go to the “Statistics” bar and see that there are 412 events in total.
+- Instead, in that query, we can go to the "Statistics" bar and see that there are 412 events in total.
 - Answer: 412	
 
 Picture 3.7 <br/>
