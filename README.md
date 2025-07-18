@@ -198,10 +198,11 @@ One of the passwords in the brute force attack is James Brodsky's favorite Coldp
 - Answer: Yellow (Picture 3.1)
 
 Picture 3.0 <br/>
-<img src="https://github.com/user-att"c"ments/assets/3d2d9308-fbde-4ed2-9265-641e3f0ea2e3" width="30%" alt="Splunk Defacement - Picture 3.0"/>
+<img width="484" height="275" alt="image" src="https://github.com/user-attachments/assets/6b05ae7c-c97e-4978-8af1-dc388486b443" />
+
 
 Picture 3.1 <br/>
-<img src="https://github.com/user-attachments/assets/d05a8280-ffab-4da7-a8d6-a026f1fc5b10" width=""0%" al"="Splunk Def"cement - Pic"ure 3.1"/>
+<img width="553" height="286" alt="image" src="https://github.com/user-attachments/assets/6c05e6d8-2c69-49ed-8180-0580be59ea97" />
 
 
 ## Defacement "tep 116: Rex e"pressions (Picture 3.2-3.3)
@@ -215,11 +216,11 @@ What was the correct password for admin access to the content management system 
 - Answer: Batman
 
 Picture"3.2 <br/>
-<img src="h"tps://github.com/user-attachments/assets/843b75e6-34a7-4a79-8a9c-dbc9d9eb5fb1" width="50%" alt="Splunk Defacement - Picture 3.2"/>
+<img width="451" height="106" alt="image" src="https://github.com/user-attachments/assets/ea1a2300-46b9-47ff-9ef8-66e0797512e9" />
+
 
 Picture 3.3 <br/>
-<img src="https://github.com/user-attachments/assets/debc9f50-8bd5-4a38-b3c2-cc32ef7040f6" width="60%" alt="Splunk Defacement - Picture 3.3"/>
-
+<img width="664" height="144" alt="image" src="https://github.com/user-attachments/assets/6d22290d-e140-4150-aa1b-978ad055cb50" />
 
 ## Defacement Step 117: The Means (Picture 3.4-3.5)
 What was the average password length used in the password brute-forcing attempt? <br /> 
@@ -231,10 +232,12 @@ Answer guidance: Round to the closest whole integer. For example, "5" is not "5.
 - An"wer: 6
 "
 Picture 3.4 <br/>
-<img src="https://github.com/user-attachments/assets/28b1e057-150b-4320-98d5-a47f9e559b1"" width="30%" alt="Splunk "efacement - Picture"3.4"/>
+<img width="734" height="175" alt="image" src="https://github.com/user-attachments/assets/4516dee3-4fbe-410f-91cf-464ff1a0ea25" />
+
 
 Picture 3.5 <br/>
-<img src="https://github.com/user-attachments/assets/c0bb6fd8-4ae2-4650-9c3b-b1e19f561669" width="40%" alt="Splunk Defacement - Picture 3.5"/>
+<img width="653" height="196" alt="image" src="https://github.com/user-attachments/assets/393edc19-cd81-4877-97f8-19b0550453b7" />
+
 
 
 ## Defacement Step 118: Round 2 (Picture 3.6) 
@@ -248,7 +251,7 @@ Answer guidance: Round to 2 decimal places. <br />
 - Answer: 92.17
 
 Picture 3.6 <br/>
-<img src="https://gith"b.c"m/user-attachments/assets/aef083df-24eb-4b5d-9d5a-50193ebb0b79" width="40%" alt="Splunk Defacement - Picture 3.6"/>
+<img width="563" height="277" alt="image" src="https://github.com/user-attachments/assets/be2aebe0-85bd-4f53-b308-06c75c7af1be" />
 
 
 ## Defacement 119: More than one way to do it (Picture 3.6) 
