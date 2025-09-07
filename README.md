@@ -9,9 +9,7 @@
 ### Splunk IR Lab — Website Defacement: From Signal to Root Cause
 Hector M. Reyes  | Boss of the SOC | [Google Docs Link | Splunk: Website Defacement](https://docs.google.com/document/d/1yfkpx3jznk6c5z8mrRk0SUCVaO03F9aNqglNuQ8HQSE/pub)
 
-<div align="center">
-  <img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="40%" alt="giphy"/>
-</div>
+![1733695831697](https://github.com/user-attachments/assets/516a7c9d-ed7b-4567-9546-40909bd70e6c)
 
 ---
 
