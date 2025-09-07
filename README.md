@@ -1,6 +1,6 @@
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/523985a4-07ce-4084-a36c-52a2243e502e" width="99%" alt="Boss of the SOC"/>
+  <img src="https://github.com/user-attachments/assets/523985a4-07ce-4084-a36c-52a2243e502e" width="90%" alt="Boss of the SOC"/>
 </div>
 
 ---
@@ -10,7 +10,7 @@
 Hector M. Reyes  | Boss of the SOC | [Google Docs Link | Splunk: Website Defacement](https://docs.google.com/document/d/1yfkpx3jznk6c5z8mrRk0SUCVaO03F9aNqglNuQ8HQSE/pub)
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/aa505c5a-cad1-49ef-96b1-62fa6f2c2272" width="50%" alt="Splunk Image"/>
+  <img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="50%" alt="giphy"/>
 </div>
 
 ---
@@ -24,6 +24,8 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
 <div align="center">
   <img src="https://github.com/user-attachments/assets/cbdab132-71d3-4776-b254-bf15536e2354" width="60%" alt="spl43"/>
 </div>
+
+---
 
 ## Pre-Engagement
 We must examine two pieces of evidence before beginning our investigation. First, we have Alice’s journal, which spans from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the “Mission Document.” Here, you can learn about our APT group, Poison Ivy. We get a look at the suspects from the GCPD perspective.
@@ -43,10 +45,6 @@ We must examine two pieces of evidence before beginning our investigation. First
 | Hash/Regex   | RegEx (Regular Expressions)| Pattern matching and data extraction                 |
 
 ---
-
-<div align="center">
-  <img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="60%" alt="giphy"/>
-</div>
 
 ## Defacement 101: Find the Suspects
 What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities?
@@ -270,6 +268,8 @@ How many seconds elapsed between when the brute force password scan identified t
 
 Picture 3.6 <br/>
 <img width="563" height="277" alt="image" src="https://github.com/user-attachments/assets/be2aebe0-85bd-4f53-b308-06c75c7af1be" />
+
+---
 
 ## Defacement 119: More Than One Way
 How many unique passwords were attempted in the brute force attempt?
