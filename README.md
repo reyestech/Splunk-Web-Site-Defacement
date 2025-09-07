@@ -272,9 +272,4 @@ This project demonstrates how Splunk can be utilized to detect and investigate w
 
 By working through a realistic and common cybersecurity scenario, we explored Splunk's tools for monitoring threats and responding to incidents. This project emphasizes the importance of staying informed about best practices in cybersecurity and the critical skills required of a security analyst, including data analysis, investigation of security issues, and the use of leading tools to safeguard digital environments. These are essential competencies for anyone pursuing a role in cybersecurity.
 
-> Finding Diagrams
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/060ffd6d-d398-45ae-b0fc-fd25c2969820" width="80%" alt="Splunk Defacement - Finding Diagrams"/>
-</div>
-
-
+<img width="536" height="343" alt="image" src="https://github.com/user-attachments/assets/09bfca95-7014-4384-8fa1-c8dd6b3d9aa0" />
