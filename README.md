@@ -16,13 +16,11 @@ Hector M. Reyes  | SOC Analysis | Boss of the SOC
 
 ---
 
+## **Scenario**
+GCPD reports that imreallynotbatman[.]com (hosted in Wayne Enterprises' space) was defaced by APT Po1s0n1vy. Your job is to confirm the defacement, reconstruct the path to compromise, and document hardening steps. The lab uses BOSS of the SOC v1 data and includes supporting artifacts (memo & journal).
+
 ## **Intro to the Web Defacement**
 Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com, hosted on Wayne Enterprises' IP address space, has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation's CEO) was compromised.
-### Tools Used
-> - Splunk | SIEM (Security Information and Event Management)
-> - Windows Sandbox | Sandboxie-Plus
-> - VirusTotal | AlientVault 
-> - md5decrypt | REX Expressions
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/cbdab132-71d3-4776-b254-bf15536e2354" width="60%" alt="spl43"/>
