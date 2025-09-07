@@ -33,11 +33,23 @@ We must examine two pieces of evidence before beginning our investigation. First
 - GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
 
+### 📦 Tools Reference 
+
+| Category     | Tool / Feature             | Purpose                                              |
+| ------------ | -------------------------- | ---------------------------------------------------- |
+| SIEM         | Splunk                     | Security Information and Event Management (SIEM)     |
+| Sandbox      | Windows Sandbox            | Isolated Windows test environment                    |
+| Sandbox      | Sandboxie-Plus             | Lightweight application sandboxing                   |
+| Threat Intel | VirusTotal                 | Multi-engine malware scanning and file/URL analysis  |
+| Threat Intel | AlienVault OTX             | Threat intelligence and community-shared indicators  |
+| Hash/Regex   | md5decrypt                 | Online MD5 hash lookup / cracking                    |
+| Hash/Regex   | RegEx (Regular Expressions)| Pattern matching and data extraction                 |
+
+---
+
 <div align="center">
   <img src="https://github.com/reyestech/Splunk-Web-Site-Defacement/assets/153461962/73ea7b7f-5f81-47bb-9520-bea78b35fb88" width="60%" alt="giphy"/>
 </div>
-
----
 
 ## Defacement 101: Find the Suspects
 What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities?
@@ -60,6 +72,8 @@ Picture 1.3 <br/>
 Picture 1.4 <br/>
 <img src="https://github.com/user-attachments/assets/7b1bb136-8e91-43ce-b6b0-86752fffce81" width="60%" alt="Splunk Defacement - Picture 1.4"/>
 
+---
+
 ## Defacement Step 102: Expose the Target 
 What company created the web vulnerability scanner used by Po1s0n1vy? Type the company name.
 - We continue looking through the “INTERESTING FIELDS” on the left side, in Src_header, which has Po1s0n1vy/40.80.148.42 traffic using a network vulnerability scanner, Acunetix. (Picture 1.5) 
@@ -71,6 +85,8 @@ Picture 1.5 <br/>
 Picture 1.6 <br/>
 <img src="https://github.com/user-attachments/assets/87d4c6b0-528d-4768-94ca-834aa2f449ad" width="60%" alt="Splunk Defacement - Picture 1.6"/>
 
+---
+
 ## Defacement Step 103: Look Through the Contents
 What content management system is imreallynotbatman.com likely using? 
 - We Googled which Content Management Systems (CMS) are most commonly used and saw some examples of what the domain could be using. 
@@ -81,9 +97,11 @@ What content management system is imreallynotbatman.com likely using?
 Picture 1.7 <br/>
 <img src="https://github.com/user-attachments/assets/9c4a4a0e-357c-472b-8889-2f84837dc576" width="55%" alt="Splunk Defacement - Picture 1.7"/>
 
+---
+
 ## Defacement Step 104: Find the Target .exe File
 What is the name of the file that defaced the imreallynotbatman.com website? Please submit only the file name with the extension.
-Answer guidance: For example, "notepad.exe" or "favicon.ico"
+> Answer guidance: For example, "notepad.exe" or "favicon.ico"
 - In the field HTTP. When we see an HTTP content type of “image/jpeg”, we open it and see a .jpeg file associated with it. 
 - Answer: Poisonivy-is-coming-for-you-batman.jpeg
 
@@ -93,6 +111,7 @@ Picture 1.8 <br/>
 Picture 1.9 <br/>
 <img src="https://github.com/user-attachments/assets/6140c651-1d52-4433-9672-9b12ac8a7d15" width="65%" alt="Splunk Defacement - Picture 1.9"/>
 
+---
 
 ## Defacement Step 105: Target’s FQDN 
 This attack utilized dynamic DNS to resolve the malicious IP address. What fully qualified domain name (FQDN) is associated with this attack? <br /> 
@@ -102,6 +121,7 @@ This attack utilized dynamic DNS to resolve the malicious IP address. What fully
 Picture 2.0 <br/>
 <img src="https://github.com/user-attachments/assets/bfa888cc-31ba-48b2-9970-71ab99ee5609" width="60%" alt="Splunk Defacement - Picture 2.0"/>
 
+---
 
 ## Defacement Step 106: Get the dest_ip
 What IPv4 address is likely attempting a brute-force password attack against imreallynotbatman.com?
@@ -112,6 +132,8 @@ What IPv4 address is likely attempting a brute-force password attack against imr
 Picture 2.1 <br/>
 <img src="https://github.com/user-attachments/assets/45dda3ca-d0de-415e-8cf8-55186478d963" width="40%" alt="Splunk Defacement - Picture 2.1"/>
 
+---
+
 ## Defacement Step 108: Brute-force Attacks Leave a Network Trail (Picture 2.2)
 What IPv4 address is likely attempting a brute-force password attack against imreallynotbatman.com? <br /> 
 - We can use the dest_ip to query what IP Address has been hitting the server using the query "sourcetype=stream" "dest_ip" and head to the src_ip. We see 99% for IP 23.22.63.114.
@@ -121,11 +143,11 @@ What IPv4 address is likely attempting a brute-force password attack against imr
 Picture 2.2 <br/>
 <img src="https://github.com/user-attachments/assets/08f4c7ab-f891-4453-9b5d-a56fbaa6d1b5" width="60%" alt="Splunk Defacement - Picture 2.2"/>
 
+---
+
 ## Defacement Step 109: Filenames
 What is the name of the executable uploaded by Po1s0n1vy?
-
-Answer guidance: Please include the file extension. (For example, "notepad.exe" or "favicon.ico")
-
+> Answer guidance: Please include the file extension. (For example, "notepad.exe" or "favicon.ico")
 - Since we already have Po1s0n1vy's network traffic, we can filter it by adding ".exe" to our index.
 - We find 3791.exe in the "fileinfo. Filename. " When we open it, we see that Po1s0n1vy uploaded it.
 - Enter Search: index="botsv1" sourcetype="suricata" dest_ip="192.168.250.70" http.http_method=POST .exe
@@ -134,6 +156,7 @@ Answer guidance: Please include the file extension. (For example, "notepad.exe" 
 Picture 2.3 <br/>
 <img src="https://github.com/user-attachments/assets/dd743112-5bf9-4c1e-abd2-74ffcb6c0bf1" width="50%" alt="Splunk Defacement - Picture 2.3"/>
 
+---
 
 ## Defacement Step 110: Crowdsource Your Way To a Solution
 What is the MD5 hash of the executable uploaded? 
@@ -147,13 +170,17 @@ Picture 2.4 <br/>
 Picture 2.5 <br/>
 <img src="https://github.com/user-attachments/assets/c24be66d-17a3-491d-a97f-6746cffa6e4f" width="60%" alt="Splunk Defacement - Picture 2.5"/>
 
+---
+
 ## Defacement Step 111: Scan the IPv4 
 GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if the initial compromise fails, are to send a spear phishing email with custom malware attached to their intended target. This malware is typically associated with Po1s0n1vys' initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
-- We can use tools like Virustotal.com to scan the attacker's IP address. This allows us to see the SHA256 found under the basic properties.                                                 
+- We can use tools like Virustotal.com to scan the attacker's IP address. This allows us to see the SHA256 found under basic properties.
 - Answer: 9709473ab351387aab9e816eff3910b9f28a7a70202e250ed46dba8f820f34a8
 
 Picture 2.6 <br/>
 <img src="https://github.com/user-attachments/assets/4b8e44d5-d71a-44de-8e3a-48554d77dee5" width="60%" alt="Splunk Defacement - Picture 2.6"/>
+
+---
 
 ## Defacement Step 112: Let's Buy Steve a Beer
 What special hex code is associated with the customized malware discussed in question 111?
@@ -170,7 +197,9 @@ Picture 2.7 <br/>
 Picture 2.8 <br/>
 <img src="https://github.com/user-attachments/assets/939b7095-4d34-46c5-82e9-fe1b10848a23" width="50%" alt="Splunk Defacement - Picture 2.8"/>
 
-## Defacement Step 114: Return to basics 
+---
+
+## Defacement Step 114: Return to Basics 
 What was the first brute-force password used?
 - At first, you might get lost and overwhelmed by the hundreds of entries that could have your password. However, our search narrows when we return to the prior query, filter, and sort entries by date.
 - Go back to our index "botsv1 query. " Remove the .exe and replace it with "| table _time form_data" to see the needed detail sorted by event time and date. We can head to the earliest date and see the first password attempted.
@@ -179,6 +208,8 @@ What was the first brute-force password used?
 
 Picture 2.9 <br/>
 <img src="https://github.com/user-attachments/assets/5fcbbf5c-9949-448c-ab78-daf65d1a2740" width="50%" alt="Splunk DefacemEnterprises'e 2.9"/>
+
+---
 
 ## Defacement Step 115: Google's Your Friend
 One of the passwords in the brute force attack is James Brodsky's favorite Coldplay song. We are looking for a six-character word on this one. Which is it?
@@ -195,6 +226,8 @@ Picture 3.0 <br/>
 
 Picture 3.1 <br/>
 <img width="553" height="286" alt="image" src="https://github.com/user-attachments/assets/6c05e6d8-2c69-49ed-8180-0580be59ea97" />
+
+---
 
 ## Defacement Step 116: Rex Expressions
 What was the correct password for admin access to the content management system running "imreallynotbatman.com"?
@@ -254,9 +287,45 @@ Picture 3.7 <br/>
 
 ---
 
-## **Conclusion**
-This project demonstrates how Splunk can be utilized to detect and investigate website defacement attacks. Focusing on the subject company as the target, we analyzed logs to identify suspicious activities that resulted in alterations made by a hacker group. The process involved tracking unusual web traffic, identifying malicious IP addresses, and connecting various clues to understand how the attack was executed. 
+## 🔄 **Recap — Step by Step**
+| Phase                  | Implementation                                             | Purpose                                  |
+| --------------------- | ---------------------------------------------------------- | ---------------------------------------- |
+| Bound the Window      | Mark first complaint + last known-good render              | Keep searches tight and relevant         |
+| Surface Scanners      | Find noisy sources probing the domain                      | Identify likely entry/pressure points    |
+| Fingerprint the Stack | Confirm CMS/tech (e.g., Joomla)                            | Narrow vuln paths & admin/upload areas   |
+| Prove Defacement      | Locate altered artifact + exact change time                | Validate impact and anchor the timeline  |
+| Pivot to POSTs/Uploads| Trace requests right before change; inspect form data      | Reveal upload vectors and abused routes  |
+| Auth Precursors       | Detect failed → success bursts / credential stuffing       | Tie credential misuse to the compromise  |
+| Map Attacker Infra    | Extract dynamic-DNS FQDNs + staging IPs                    | Attribute infra; expand IoCs             |
+| Tie to Victim Host    | Confirm destination IP serving defaced content             | Link activity to affected hosts          |
+| Collect IoCs & Evidence | Capture IPs, UAs, filenames, hashes, screenshots        | Support containment & post-mortems       |
+| Contain & Recover     | Block IoCs, restore clean files, rotate credentials        | Stop activity and return to good state   |
+| Harden                | WAF/rate limits, restrict uploads/admin, tune FIM          | Reduce recurrence & shrink attack surface|
+| Operationalize        | Save searches, alerts/dashboards, document runbook         | Make response repeatable and faster      |
 
-By working through a realistic and common cybersecurity scenario, we explored Splunk's tools for monitoring threats and responding to incidents. This project emphasizes the importance of staying informed about best practices in cybersecurity and the critical skills required of a security analyst, including data analysis, investigation of security issues, and the use of leading tools to safeguard digital environments. These are essential competencies for anyone pursuing a role in cybersecurity.
+## 📚 **Lessons Learned**
+- [ ] **Visibility triad wins:** Web + Auth + FIM/IDS together told the full story.
+     - File integrity, HTTP, and authentication logs, together, told the whole story - individually, they fell short.
+- [ ] **Correlation over single signals:** Small clues become decisive when chained.
+   - A stray JPEG, a brute-force login spike, or a POST to an upload path may mean little alone, but they become decisive when correlated.
+- [ ] **Repeatability wins:** Turn ad-hoc queries into alerts/dashboards to cut toil.
+   - Turning one-off queries into alerts and dashboards is how IR teams scale from reactive to proactive.
+- [ ] **Context elevates detections:** VirusTotal lookups + decoded artifacts increase confidence.
+   - Pivoting to VirusTotal and decoding artifacts sharpened attribution and raised confidence in the findings.
+- [ ] **Evidence discipline:** IoCs + screenshots enable clean handoffs and audits.
+    - Capturing IoCs and screenshots made the investigation auditable and ready for handoff.
 
-<img width="536" height="343" alt="image" src="https://github.com/user-attachments/assets/09bfca95-7014-4384-8fa1-c8dd6b3d9aa0" />
+<img width="392" height="558" alt="image" src="https://github.com/user-attachments/assets/dca220e9-9d45-4217-8b67-d8d35991f64a" />
+
+---
+
+## 🏁 **Conclusion**
+This lab demonstrates how Splunk can turn raw logs into a clear timeline of compromise, containment, and hardening. By defining a time window, correlating data from multiple sources, and operationalizing detections, we not only confirmed the defacement but also created a repeatable playbook for future incidents.
+
+In real-world Incident Response, the same rhythm applies: observe → correlate → validate → harden. Practicing this in labs builds the muscle memory so that when alerts are real, the workflow feels intuitive and efficient.
+
+👉 **Next Up**: Ransomware IR Lab—early encryption signals, process lineage, and lateral movement.
+
+<img width="536" height="343" alt="image" src="https://github.com/user-attachments/assets/bec354d2-ff0d-42b8-b29d-564524caf570" />
+
+---
