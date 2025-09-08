@@ -61,11 +61,8 @@ To prepare for your investigation, I have staged the environment and configured 
 
 **Splunk Hunt Setup**: 
 - **Time window:** Sep 1–13, 2016 → tighten to exact defacement time once found.
-  > Start with the broad time frame of September 1–13, 2016, and tighten it as you gather evidence to pinpoint the exact moment of the defacement.  
 - **Primary asset(s):** `imreallynotbatman.com` • Web server `dest_ip ≈ 192.168.250.70` (BOTS v1).
-  > Identify the primary assets at risk, specifically imreallynotbatman.com, with a focus on the web server located at destination IP ≈ 192.168.250.70 (designated as BOTS v1 for tracking purposes). 
 - **Data sources:** `stream:http`, `suricata`, `stream:dns` (plus server logs if present).
-  > Utilize various data streams, including stream:http for web traffic, suricata for intrusion detection alerts, and stream:dns for domain name queries. Additionally, review server logs if they are available for further insights.
 
 **Pro Tips**:  
 - Use the **Fields** sidebar (e.g., `src_ip`, `useragent`, `content_type`, `http_method`).  
