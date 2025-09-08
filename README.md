@@ -7,36 +7,69 @@
 
 # Splunk: Website Defacement
 ### Splunk IR Lab — Website Defacement: From Signal to Root Cause
-Hector M. Reyes  | Boss of the SOC 
+**Hector M. Reyes | Boss of the SOC** | `Date`
 
-Website Defacement IR Lab — TL;DR
-> - Confirmed Po1s0n1vy defacement of imreallynotbatman.com.
-> - Traced attack: web scanner (Acunetix) → Joomla CMS exploit → brute-force POSTs → uploaded executable (3791.exe) → defacement JPEG + dynamic DNS infra.
-> - Documented how to pivot from raw HTTP logs to proof of defacement and hardening (FIM, WAF, rate limiting).
+### TL;DR
+- Confirmed **Po1s0n1vy** defacement of `imreallynotbatman.com` using Splunk SIEM data.
+- Traced attack chain: **Acunetix scan → CMS (Joomla) → brute-force POSTs → uploaded executable (3791.exe) → defacement JPEG + dynamic DNS**.
+- Captured IoCs and turned ad-hoc hunts into repeatable detections (alerts/dashboards).
 
-Key skills showcased:
-> Splunk SPL queries, web log analysis, CMS fingerprinting, brute-force detection, IOC enrichment (VirusTotal, AlienVault), and repeatable detection engineering.
-
-<img width="392" height="558" alt="image" src="https://github.com/user-attachments/assets/dca220e9-9d45-4217-8b67-d8d35991f64a" />
-
----
-
-## **Scenario**
-GCPD reports that imreallynotbatman[.]com (hosted in Wayne Enterprises' space) was defaced by APT Po1s0n1vy. Your job is to confirm the defacement, reconstruct the path to compromise, and document hardening steps. The lab uses BOSS of the SOC v1 data and includes supporting artifacts (memo & journal).
+**Key skills** 
+> SPL queries, web/HTTP log analysis, CMS fingerprinting, brute-force detection, threat-intel enrichment, and detection engineering.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/516a7c9d-ed7b-4567-9546-40909bd70e6c" width="80%" alt="1733695831697"/>
+  <img src="https://github.com/user-attachments/assets/516a7c9d-ed7b-4567-9546-40909bd70e6c" width="50%" alt="1733695831697"/>
 </div>
-
-## **Intro to the Web Defacement** ☠️
-Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online, `http://pastebin.com/Gw6dWjS9`, that the website `www.imreallynotbatman.com`, hosted on Wayne Enterprises' IP address space, has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation's CEO) was compromised.
 
 ---
 
-## 🎖️ Pre-Engagement
-We must examine two pieces of evidence before beginning our investigation. First, we have Alice’s journal, which spans from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the “Mission Document.” Here, you can learn about our APT group, Poison Ivy. We get a look at the suspects from the GCPD perspective.
-- GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
-- Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
+# **Scenario**
+Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.
+
+<img width="857" height="428" alt="image" src="https://github.com/user-attachments/assets/c7dbd84b-bb05-4232-8487-1be38496a473" />
+
+---
+
+# **Intro to the Web Defacement** ☠
+## **Your Assignment (Objectives)**  
+Your primary goal is to conduct a thorough investigation into the suspected defacement of the website imreallynotbatman.com. This includes establishing the extent of the impact, determining the exact timing of the incident, and mapping out the attacker's route and infrastructure. To effectively monitor for future threats, you are expected to produce Indicators of Compromise (IoCs) and develop a repeatable set of searches and alerts.
+
+1. **Artifact Confirmation**: Confirm the alteration of the defaced JPEG on the website and document the date and time of the incident.
+2. **Activity Analysis**:   Investigate any prior scanning activity and examine the website's CMS or tech stack, focusing on potential upload or authentication routes used by the attacker.
+3. **Attribution of Findings**: Use signals like dynamic DNS, FQDNs, source IPs, and filenames to help identify the attacker’s profile and infrastructure.
+4. **Brute-Force Activity Quantification**: Assess any brute-force attempts, noting time frames of credential successes to identify exploited patterns.
+5. **Packaging of Findings**: Compile your findings into a resource package that includes detection methods, containment actions, and recommendations for strengthening website security.
+
+## **Evidence Artifacts**  
+The following artifacts are crucial in establishing context and providing a timeline to anchor your Splunk pivots during the investigation:
+- **GCPD memo (Po1s0n1vy):** https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html  
+- **Alice’s journal (Sep 1–13, 2016):** https://botscontent.netlify.app/v1/alice-journal.html  
+- **Pastebin tip (defacement claim):** `http://pastebin.com/Gw6dWjS9`  
+
+---
+
+## **Hunt Setup & Pre-Engagement**  
+To prepare for your investigation, I have staged the environment and configured Splunk for targeted hunts. This involved pivoting through HTTP/IDS data and authentication signals to both confirm the defacement and trace its root cause.
+
+**Preparation (Evidence Review)**:  
+- Begin by skimming through the **GCPD memo** + **Alice’s journal** to establish a cohesive timeframe and identify any potential suspects involved in the incident.  
+- Document candidate IoCs, including IP addresses, fully qualified domain names (FQDNs), filenames, and hashes, to facilitate swift searches throughout your analysis.  
+- Create a plan for subsequent pivots, focusing on various elements such as HTTP content types, user agents, POST/upload paths, and bursts of authentication attempts to uncover any suspicious activities.
+
+**Splunk Hunt Setup**: 
+- **Time window:** Sep 1–13, 2016 → tighten to exact defacement time once found.
+  > Start with the broad time frame of September 1–13, 2016, and tighten it as you gather evidence to pinpoint the exact moment of the defacement.  
+- **Primary asset(s):** `imreallynotbatman.com` • Web server `dest_ip ≈ 192.168.250.70` (BOTS v1).
+  > Identify the primary assets at risk, specifically imreallynotbatman.com, with a focus on the web server located at destination IP ≈ 192.168.250.70 (designated as BOTS v1 for tracking purposes). 
+- **Data sources:** `stream:http`, `suricata`, `stream:dns` (plus server logs if present).
+  > Utilize various data streams, including stream:http for web traffic, suricata for intrusion detection alerts, and stream:dns for domain name queries. Additionally, review server logs if they are available for further insights.
+
+**Pro Tips**:  
+- Use the **Fields** sidebar (e.g., `src_ip`, `useragent`, `content_type`, `http_method`).  
+- Save strong searches as **Reports** → later convert to **Alerts/Dashboards**.  
+- Track IoCs and timestamps in a scratchpad for quick cross-pivots.  
+- Validate findings with screenshots and exact event times for handoff.
+> 🕵️‍♀️ **Happy Hunting!**
 
 ### 📦 Tools Reference 
 
@@ -51,27 +84,6 @@ We must examine two pieces of evidence before beginning our investigation. First
 | Hash/Regex   | RegEx (Regular Expressions)| Pattern matching and data extraction                 |
 
 ---
-# Getting Started — Hunt Setup
-
-
-**Objective:** Confirm defacement of `imreallynotbatman.com`, trace scanner → upload → deface path, collect IoCs, and document hardening.
-
-**Time Window:** **Sep 1–13, 2016** (Alice’s journal window) → tighten once the exact change time is found  
-**Primary Asset(s):** `imreallynotbatman.com` (public blog) • Web server (`dest_ip` ≈ `192.168.250.70` in BOTS v1)  
-**Key Data Sources:** `stream:http`, `suricata`, `stream: DNS`, (optional) web server logs if present  
-**Reference Artifacts:**  
-- GCPD memo — Po1s0n1vy APT overview  
-- Alice’s journal — daily timeline/context
-
-**Pro Tips:**  
-- Lock the Splunk timepicker to the **journal window** first; narrow once you find the defacement write.  
-- Use **fields sidebar** to pivot fast (e.g., `src_ip`, `useragent`, `content_type`, `http_method`).  
-- Save your useful searches as **Reports** and convert to **Alerts** later.  
-- Keep an **IoC scratchpad** (IPs, FQDNs, filenames, hashes, timestamps) as you go.
-
-> 🕵️‍♀️ **Happy Hunting!**
-
----
 
 ## Defacement 101 — Find the Suspects
 What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities?
@@ -81,14 +93,14 @@ What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imr
 - Enter Search: index="botsv1" imreallynotbatman.com
 - index=”botsv1” *poisonivy
 
+Goal: Fingerprint CMS/stack to narrow vuln paths (e.g., /administrator/, templates).
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http imreallynotbatman.com
 | stats count by src_ip
 | sort - count
 ```
-- [ ] **Answer:** 40.80.148.42
-
+- [ ] **Answer:** `40.80.148.42`
 
 <img src="https://github.com/user-attachments/assets/a1a91d56-9231-4446-974c-0c7eabffa4d6" width="40%" alt="Splunk Defacement - Picture 1.1"/>
 
@@ -112,13 +124,14 @@ index=botsv1 sourcetype=stream:http imreallynotbatman.com
 What company created the web vulnerability scanner used by Po1s0n1vy? Type the company name.
 - We continue looking through the “INTERESTING FIELDS” on the left side, in Src_header, which has Po1s0n1vy/40.80.148.42 traffic using a network vulnerability scanner, Acunetix. `Picture 1.5`
 
+Goal: Confirm which scanner/vendor hit the site.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http imreallynotbatman.com
 | stats values(useragent) as ua values(src_headers) as headers by src_ip
 | search ua=*Acunetix* OR headers=*Acunetix*
 ```
-- [ ] **Answer:** Acunetix
+- [ ] **Answer:** `Acunetix`
 
 <img src="https://github.com/user-attachments/assets/1445a24a-fd6f-4aac-bf3a-6bd8257db97f" width="30%" alt="Splunk Defacement - Picture 1.5"/>
 
@@ -136,13 +149,14 @@ What content management system is imreallynotbatman.com likely using?
 - WordPress, Magento, and Joomla are some of the most common.
 - Using Ctrl F, we found imreallynotbatman.com is using Joomla when we expanded the src_headers.
 
+Goal: Fingerprint CMS/stack to narrow vuln paths (e.g., /administrator/, templates).
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http imreallynotbatman.com
 | search src_headers=*Joomla* OR useragent=*Joomla* OR uri_path="*/administrator/*" OR uri_path="*/templates/*"
 | stats count values(uri_path) as paths values(src_headers) as headers by dest
 ```
-- [ ] **Answer:** Joomla
+- [ ] **Answer:** `Joomla`
 
 <img src="https://github.com/user-attachments/assets/9c4a4a0e-357c-472b-8889-2f84837dc576" width="55%" alt="Splunk Defacement - Picture 1.7"/>
 
@@ -155,6 +169,7 @@ What is the name of the file that defaced the imreallynotbatman.com website? Ple
 > Answer guidance: For example, "notepad.exe" or "favicon.ico"
 - In the field HTTP. When we see an HTTP content type of “image/jpeg”, we open it and see a .jpeg file associated with it. 
 
+Goal: Prove defacement by locating the altered artifact and its filename/time.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (content_type="image/jpeg" OR uri="*.jpg" OR uri="*.jpeg")
@@ -162,7 +177,7 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (content_type="image/
 | table _time src_ip dest_ip uri file
 | sort _time
 ```
-- [ ] **Answer:** Poisonivy-is-coming-for-you-batman.jpeg
+- [ ] **Answer:** `Poisonivy-is-coming-for-you-batman.jpeg`
 
 <img src="https://github.com/user-attachments/assets/65676b1a-b556-4974-a7a6-d746be3ef6c5" width="60%" alt="Splunk Defacement - Picture 1.8"/>
 
@@ -178,6 +193,7 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (content_type="image/
 This attack utilized dynamic DNS to resolve the malicious IP address. What fully qualified domain name (FQDN) is associated with this attack? <br /> 
 - In the same JPEG image file, you can see the FQDN prankglassinebracket.jumpingcrab.com. `Picture 2.0`
 
+Goal: Extract the dynamic-DNS FQDN tied to the attacker infra.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (http.referer=* OR referer=*)
@@ -187,7 +203,7 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (http.referer=* OR re
 | stats count by fqdn
 | sort - count
 ```
-- [ ] **Answer:** Prankglassinebracket.jumpingcrab.com
+- [ ] **Answer:** `Prankglassinebracket.jumpingcrab.com`
 
 <img src="https://github.com/user-attachments/assets/bfa888cc-31ba-48b2-9970-71ab99ee5609" width="60%" alt="Splunk Defacement - Picture 2.0"/>
 
@@ -200,13 +216,14 @@ What IPv4 address is likely attempting a brute-force password attack against imr
 - We can use the dest_ip to query what IP Address has been hitting the server using the query "sourcetype=stream" " dest_ip" and head to src_ip. We see 99% for IP 23.22.63.114.
 - Enter Search: index="botsv1" sourcetype="stream:HTTP" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd*
 
+Goal: Identify the IP likely running brute-force POSTs against the site.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http http_method=POST dest_ip=192.168.250.70
 | stats count by src_ip
 | sort - count
 ```
-- [ ] **Answer:** 23.22.63.114
+- [ ] **Answer:** `23.22.63.114`
 
 <img src="https://github.com/user-attachments/assets/45dda3ca-d0de-415e-8cf8-55186478d963" width="40%" alt="Splunk Defacement - Picture 2.1"/>
 
@@ -225,13 +242,14 @@ What IPv4 address is likely attempting a brute-force password attack against imr
 - We can use the dest_ip to query what IP Address has been hitting the server using the query "sourcetype=stream" "dest_ip" and head to the src_ip. We see 99% for IP 23.22.63.114.
 - Enter Search: index="botsv1" sourcetype="stream:HTTP" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd*
 
+Goal: Re-validate the brute-force source IP around the POST attempts.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http http_method=POST dest_ip=192.168.250.70 form_data=*username*passwd*
 | stats count by src_ip
 | sort - count
 ```
-- [ ] Answer: 23.22.63.114
+- [ ] Answer: `23.22.63.114`
 
 <img src="https://github.com/user-attachments/assets/08f4c7ab-f891-4453-9b5d-a56fbaa6d1b5" width="60%" alt="Splunk Defacement - Picture 2.2"/>
 
@@ -246,6 +264,8 @@ What is the name of the executable uploaded by Po1s0n1vy?
 - We find 3791.exe in the "fileinfo. Filename. " When we open it, we see that Po1s0n1vy uploaded it.
 - Enter Search: index="botsv1" sourcetype="suricata" dest_ip="192.168.250.70" http.http_method=POST .exe
 
+Goal: Find the executable uploaded prior to defacement.
+Answer guidance: Include the extension (e.g., `notepad.exe` or `favicon.ico`).
 **SPL**
 ```
 index=botsv1 sourcetype=suricata dest_ip=192.168.250.70 http.http_method=POST ".exe"
@@ -254,7 +274,7 @@ index=botsv1 sourcetype=suricata dest_ip=192.168.250.70 http.http_method=POST ".
 | sort _time
 
 ```
-- [ ] **Answer:** 3791.exe
+- [ ] **Answer:** `3791.exe`
 
 <img src="https://github.com/user-attachments/assets/dd743112-5bf9-4c1e-abd2-74ffcb6c0bf1" width="50%" alt="Splunk Defacement - Picture 2.3"/>
 
@@ -267,12 +287,13 @@ What is the MD5 hash of the executable uploaded?
 - Using AlienVault.com, we input the target's IP address and examine the traffic details. We then find the SHA-Hash.
 - The command "|stats values (MD5)" inputs the IP and sees its traffic to verify the details.
 
+Goal: Collect hash evidence for enrichment and blocking.
 **SPL**
 ```
 index=botsv1 sourcetype=suricata dest_ip=192.168.250.70 http.http_method=POST ".exe"
 | stats values(fileinfo.filename) as file values(fileinfo.md5) as md5 values(fileinfo.sha256) as sha256 by src_ip
 ```
-- [ ] **Answer:** AAE3F5A29935E6ABCC2C2754D12A9AF0
+- [ ] **Answer:** `AAE3F5A29935E6ABCC2C2754D12A9AF0`
 
 <img src="https://github.com/user-attachments/assets/331ec5b7-1b8a-48f8-8229-f829f78b9b4b" width="60%" alt="Splunk Defacement - Picture 2.4"/>
 
@@ -288,12 +309,13 @@ index=botsv1 sourcetype=suricata dest_ip=192.168.250.70 http.http_method=POST ".
 GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if the initial compromise fails, are to send a spear phishing email with custom malware attached to their intended target. This malware is typically associated with Po1s0n1vys' initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
 - We can use tools like Virustotal.com to scan the attacker's IP address. This allows us to see the SHA256 found under basic properties.
 
+Goal: Enrich with external intel to confirm related malware and infra.
 **SPL**
 ```
 index=botsv1 sourcetype=suricata (fileinfo.sha256=* OR "*sha256*")
 | stats values(fileinfo.sha256) as sha256 values(http.hostname) as host by http.uri
 ```
-- [ ] **Answer:** 9709473ab351387aab9e816eff3910b9f28a7a70202e250ed46dba8f820f34a8
+- [ ] **Answer:** `9709473ab351387aab9e816eff3910b9f28a7a70202e250ed46dba8f820f34a8`
 
 <img src="https://github.com/user-attachments/assets/4b8e44d5-d71a-44de-8e3a-48554d77dee5" width="60%" alt="Splunk Defacement - Picture 2.6"/>
 
@@ -308,7 +330,10 @@ What special hex code is associated with the customized malware discussed in que
 - We can search and control F to find hex codes and Botsv1s and compare them to the traffic and timeline the code should have been made. `Pictures 2.7`
 - Using Cyberchef, we insert the hex code and output,
 - "Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer.!!!" `Pictures 2.8`
-- [ ] **Answer:** ```53 74 65 76 65 20 42 72 61 6e 74 27 73 20 42 65 61 72 64 20 69 73 20 61 20 70 6f 77 65 72 66 75 6c 20 74 68 69 6e 67 2e 20 46 69 6e 64 20 74 68 69 73 20 6d 65 73 73 61 67 65 20 61 6e 64 20 61 73 6b 20 68 69 6d 20 74 6f 20 62 75 79 20 79 6f 75 20 61 20 62 65 65 72 21 21 21```
+
+Goal: Confirm the hidden message/hex associated with customized malware (external research).
+Answer guidance: Not in Splunk—derive via VirusTotal/CyberChef from referenced sample.
+- [ ] **Answer:** `53 74 65 76 65 20 42 72 61 6e 74 27 73 20 42 65 61 72 64 20 69 73 20 61 20 70 6f 77 65 72 66 75 6c 20 74 68 69 6e 67 2e 20 46 69 6e 64 20 74 68 69 73 20 6d 65 73 73 61 67 65 20 61 6e 64 20 61 73 6b 20 68 69 6d 20 74 6f 20 62 75 79 20 79 6f 75 20 61 20 62 65 65 72 21 21 21`
 
 <img src="https://github.com/user-attachments/assets/79c7cc85-19ce-4982-8c07-2beed3a45569" width="50%" alt="Splunk Defacement - Picture 2.7"/>
 
@@ -320,11 +345,12 @@ What special hex code is associated with the customized malware discussed in que
 
 ---
 
-### Defacement Step 113–114: 🚫 Outdated
+### Defacement Step 113: 🚫 Outdated
 These steps were part of earlier BOTS v1 material, but the supporting data/events are no longer present in the current dataset.  
 👉 They have been intentionally skipped in this walkthrough.
 
 ---
+
 ## Defacement Step 114 — Return to Basics
 What was the first brute-force password used?
 - At first, you might get lost and overwhelmed by the hundreds of entries that could have your password. However, our search narrows when we return to the prior query, filter, and sort entries by date.
@@ -352,10 +378,10 @@ One of the passwords in the brute force attack is James Brodsky's favorite Coldp
 - You can look online for Coldplay songs that have only six characters.
 - We found 37 songs, in total, that James could have used. `Pictures 3.0`
 - We can cross-check from our index in Splunk and filter for passwords for the number of characters and length.
-- We can use the pipe or "|" to insert the passwords we think could work. Rinse and repeat until you have searched through all the songs.
-- Use "| where userpassword in" ("insert_1", "insert_1", "insert_1", "insert_1"")
+- We can use the pipe or "|" to insert the passwords we think could work. Rinse and repeat until you have searched through all the songs. Use "| where userpassword in" ("insert_1", "insert_1", "insert_1", "insert_1"")
 - Enter Search: index="botsv1" sourcetype=" stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | eval pwlen=len(userpassword) | search pwlen=6 | where userpassword in ("clocks", "oceans", "sparks", "shiver", "yellow") | table userpassword
 
+Goal: Identify a 6-character password used during the brute-force.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -366,7 +392,7 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form
 | dedup password
 | table password
 ```
-- [ ] **Answer:** Yellow `Picture 3.1`
+- [ ] **Answer:** `Yellow` > Picture 3.1
 
 <img width="484" height="275" alt="image" src="https://github.com/user-attachments/assets/6b05ae7c-c97e-4978-8af1-dc388486b443" />
 
@@ -387,6 +413,7 @@ What was the correct password for admin access to the content management system 
 - From here, we can open Batman to verify our suspicion. `Pictures 3.3`
 - Enter Search: index="botsv1" sourcetype="stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | rex field=form_data "passwd=(?<userpassword>\w+)" | stats count by userpassword
 
+Goal: Determine the most frequently used password seen in POSTs.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -394,7 +421,7 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form
 | stats count by password
 | sort - count
 ```
-- [ ] **Answer:** Batman
+- [ ] **Answer:** `Batman`
 
 <img width="451" height="106" alt="image" src="https://github.com/user-attachments/assets/ea1a2300-46b9-47ff-9ef8-66e0797512e9" />
 
@@ -414,6 +441,8 @@ What was the average password length used in the password brute-forcing attempt?
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd
 - Enter Search: | rex field=form_data "passwd=(?<passwd>\w+)" | eval length=len(passwd) | stats avg(length)
 
+Goal: Measure average brute-force password length (round to nearest whole).
+Answer guidance: Return a whole number (e.g., 6).
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -422,7 +451,7 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form
 | stats avg(length) as avg_len
 | eval avg_len=round(avg_len,0)
 ```
-- [ ] **Answer:** 6
+- [ ] **Answer:** `6`
 
 <img width="734" height="175" alt="image" src="https://github.com/user-attachments/assets/4516dee3-4fbe-410f-91cf-464ff1a0ea25" />
 
@@ -438,11 +467,12 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form
 How many seconds elapsed between when the brute force password scan identified the correct password and the compromised login?
 > Answer guidance: Round to 2 decimal places.
 - Search for the password "batman" and filter the transaction and event durations.
-- We use a "| transaction userpassword| and "eval dur=round(duration, 2)."
-- The "dur" field on the left shows 92.17.
+- We use a "| transaction userpassword| and "eval dur=round(duration, 2)." The "dur" field on the left shows 92.17.
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd | rex field=form_data "passwd=(?<passwd>\w+)" | search passwd=batman | transaction passwd | eval dur=round(duration, 2) | table dur
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd | rex field=form_data "passwd=(?<passwd>\w+)" | search passwd=batman | transaction passwd | eval dur=round(duration, 2)
 
+Goal: Time from password discovery to successful compromise.
+Answer guidance: Round to two decimals (e.g., 92.17).
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -467,13 +497,14 @@ How many unique passwords were attempted in the brute force attempt?
 - Alternatively, we can go back to 116, as we searched for password events in that query and sorted them by count.
 - Instead, in that query, we can go to the "Statistics" bar and see that there are 412 events in total.
 
+Goal: Count the distinct passwords used in the brute-force.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
 | rex field=form_data "passwd=(?<password>\w+)"
 | stats dc(password) as unique_passwords
 ```
-- [ ] **Answer:** 412
+- [ ] **Answer:** `412`
 
 <img src="https://github.com/user-attachments/assets/ec303263-24e8-4894-bb01-595d3a23cd5c" width="60%" alt="Splunk Defacement - Picture 3.7"/>
 
