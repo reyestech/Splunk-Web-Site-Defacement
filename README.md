@@ -185,6 +185,12 @@ index=botsv1 sourcetype=stream:http http_method=POST dest_ip=192.168.250.70
 
 ---
 
+Defacement Step 107: 🚫 Outdated
+These steps were part of earlier BOTS v1 material, but the supporting data/events are no longer present in the current dataset.
+👉 They have been intentionally skipped in this walkthrough.
+
+---
+
 ## Defacement Step 108 — Brute-force Network Trail (repeat check)
 What IPv4 address is likely attempting a brute-force password attack against imreallynotbatman.com? <br /> 
 - We can use the dest_ip to query what IP Address has been hitting the server using the query "sourcetype=stream" "dest_ip" and head to the src_ip. We see 99% for IP 23.22.63.114.
