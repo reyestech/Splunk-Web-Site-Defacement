@@ -26,7 +26,10 @@
 # **Scenario**
 Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.
 
-<img width="857" height="428" alt="image" src="https://github.com/user-attachments/assets/c7dbd84b-bb05-4232-8487-1be38496a473" />
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/c7dbd84b-bb05-4232-8487-1be38496a473" width="70%" alt="image"/>
+</div>
+
 
 ---
 
@@ -323,25 +326,33 @@ index=botsv1 sourcetype=suricata (fileinfo.sha256=* OR "*sha256*")
 
 ---
 
-## Defacement Step 112 — Let's Buy Steve a Beer (First brute-force password)-----------------------Steps 113-114 are Outdated
-What special hex code is associated with the customized malware discussed in question 111?
-> Answer guidance: It's not in Splunk!!
-- We have the attacker's IP traffic in Virustotal.com and his username, Botsv1.
-- We can search and control F to find hex codes and Botsv1s and compare them to the traffic and timeline the code should have been made. `Pictures 2.7`
-- Using Cyberchef, we insert the hex code and output,
-- "Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer.!!!" `Pictures 2.8`
+## Defacement Step 112 — Let’s Buy Steve a Beer (Hidden Hex Message)
+
+**Goal:** Confirm the hidden hex message associated with the customized malware sample from Step 111.  
+> ⚠️ **Note:** This step is not Splunk-based — the answer is derived from external research (VirusTotal + CyberChef).
+
+**Process:**
+- Pulled attacker’s malware sample metadata from VirusTotal.  
+- Used **Ctrl+F** to locate relevant hex codes tied to the `botsv1` sample.  
+- Decoded the hex string in **CyberChef**, revealing a hidden message.  
+- Message: `"Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer!!!"`
 
 Goal: Confirm the hidden message/hex associated with customized malware (external research).
 Answer guidance: Not in Splunk—derive via VirusTotal/CyberChef from referenced sample.
+**Answer guidance:** Provide the raw hex string (include spacing).
+
 - [ ] **Answer:** `53 74 65 76 65 20 42 72 61 6e 74 27 73 20 42 65 61 72 64 20 69 73 20 61 20 70 6f 77 65 72 66 75 6c 20 74 68 69 6e 67 2e 20 46 69 6e 64 20 74 68 69 73 20 6d 65 73 73 61 67 65 20 61 6e 64 20 61 73 6b 20 68 69 6d 20 74 6f 20 62 75 79 20 79 6f 75 20 61 20 62 65 65 72 21 21 21`
 
-<img src="https://github.com/user-attachments/assets/79c7cc85-19ce-4982-8c07-2beed3a45569" width="50%" alt="Splunk Defacement - Picture 2.7"/>
 
-`Picture 2.7`
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/79c7cc85-19ce-4982-8c07-2beed3a45569" width="45%" alt="Splunk Defacement - Picture 2.7"/>
+  <img src="https://github.com/user-attachments/assets/939b7095-4d34-46c5-82e9-fe1b10848a23" width="45%" alt="Splunk Defacement - Picture 2.8"/>
+</div>
 
-<img src="https://github.com/user-attachments/assets/939b7095-4d34-46c5-82e9-fe1b10848a23" width="50%" alt="Splunk Defacement - Picture 2.8"/>
-
-`Picture 2.8`
+<p align="center">
+  <i>Picture 2.7 — Malware sample metadata</i> &nbsp; | &nbsp; 
+  <i>Picture 2.8 — CyberChef decoded message</i>
+</p>
 
 ---
 
