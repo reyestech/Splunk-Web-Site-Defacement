@@ -7,25 +7,33 @@
 
 # Splunk: Website Defacement
 ### Splunk IR Lab — Website Defacement: From Signal to Root Cause
-Hector M. Reyes  | Boss of the SOC | [Google Docs Link | Splunk: Website Defacement](https://docs.google.com/document/d/1yfkpx3jznk6c5z8mrRk0SUCVaO03F9aNqglNuQ8HQSE/pub)
+Hector M. Reyes  | Boss of the SOC 
 
-![1733695831697](https://github.com/user-attachments/assets/516a7c9d-ed7b-4567-9546-40909bd70e6c)
+Website Defacement IR Lab — TL;DR
+> - Confirmed Po1s0n1vy defacement of imreallynotbatman.com.
+> - Traced attack: web scanner (Acunetix) → Joomla CMS exploit → brute-force POSTs → uploaded executable (3791.exe) → defacement JPEG + dynamic DNS infra.
+> - Documented how to pivot from raw HTTP logs to proof of defacement and hardening (FIM, WAF, rate limiting).
+
+Key skills showcased:
+> Splunk SPL queries, web log analysis, CMS fingerprinting, brute-force detection, IOC enrichment (VirusTotal, AlienVault), and repeatable detection engineering.
+
+<img width="392" height="558" alt="image" src="https://github.com/user-attachments/assets/dca220e9-9d45-4217-8b67-d8d35991f64a" />
 
 ---
 
 ## **Scenario**
 GCPD reports that imreallynotbatman[.]com (hosted in Wayne Enterprises' space) was defaced by APT Po1s0n1vy. Your job is to confirm the defacement, reconstruct the path to compromise, and document hardening steps. The lab uses BOSS of the SOC v1 data and includes supporting artifacts (memo & journal).
 
-## **Intro to the Web Defacement**
-Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online, `http://pastebin.com/Gw6dWjS9`, that the website `www.imreallynotbatman.com`, hosted on Wayne Enterprises' IP address space, has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation's CEO) was compromised.
-
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/cbdab132-71d3-4776-b254-bf15536e2354" width="60%" alt="spl43"/>
+  <img src="https://github.com/user-attachments/assets/516a7c9d-ed7b-4567-9546-40909bd70e6c" width="80%" alt="1733695831697"/>
 </div>
+
+## **Intro to the Web Defacement** ☠️
+Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online, `http://pastebin.com/Gw6dWjS9`, that the website `www.imreallynotbatman.com`, hosted on Wayne Enterprises' IP address space, has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation's CEO) was compromised.
 
 ---
 
-## Pre-Engagement
+## 🎖️ Pre-Engagement
 We must examine two pieces of evidence before beginning our investigation. First, we have Alice’s journal, which spans from September 1, 2016, to September 13, 2016. Here, she documents the events of her day, allowing us to see events from her perspective. Then, we have the “Mission Document.” Here, you can learn about our APT group, Poison Ivy. We get a look at the suspects from the GCPD perspective.
 - GCPD memo: https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html
 - Alice's journal: https://botscontent.netlify.app/v1/alice-journal.html
@@ -41,6 +49,27 @@ We must examine two pieces of evidence before beginning our investigation. First
 | Threat Intel | AlienVault OTX             | Threat intelligence and community-shared indicators  |
 | Hash/Regex   | md5decrypt                 | Online MD5 hash lookup / cracking                    |
 | Hash/Regex   | RegEx (Regular Expressions)| Pattern matching and data extraction                 |
+
+---
+# Getting Started — Hunt Setup
+
+
+**Objective:** Confirm defacement of `imreallynotbatman.com`, trace scanner → upload → deface path, collect IoCs, and document hardening.
+
+**Time Window:** **Sep 1–13, 2016** (Alice’s journal window) → tighten once the exact change time is found  
+**Primary Asset(s):** `imreallynotbatman.com` (public blog) • Web server (`dest_ip` ≈ `192.168.250.70` in BOTS v1)  
+**Key Data Sources:** `stream:http`, `suricata`, `stream: DNS`, (optional) web server logs if present  
+**Reference Artifacts:**  
+- GCPD memo — Po1s0n1vy APT overview  
+- Alice’s journal — daily timeline/context
+
+**Pro Tips:**  
+- Lock the Splunk timepicker to the **journal window** first; narrow once you find the defacement write.  
+- Use **fields sidebar** to pivot fast (e.g., `src_ip`, `useragent`, `content_type`, `http_method`).  
+- Save your useful searches as **Reports** and convert to **Alerts** later.  
+- Keep an **IoC scratchpad** (IPs, FQDNs, filenames, hashes, timestamps) as you go.
+
+> 🕵️‍♀️ **Happy Hunting!**
 
 ---
 
@@ -185,7 +214,7 @@ index=botsv1 sourcetype=stream:http http_method=POST dest_ip=192.168.250.70
 
 ---
 
-Defacement Step 107: 🚫 Outdated
+### Defacement Step 107: 🚫 Outdated
 These steps were part of earlier BOTS v1 material, but the supporting data/events are no longer present in the current dataset.
 👉 They have been intentionally skipped in this walkthrough.
 
@@ -291,7 +320,7 @@ What special hex code is associated with the customized malware discussed in que
 
 ---
 
-## Defacement Step 113–114: 🚫 Outdated
+### Defacement Step 113–114: 🚫 Outdated
 These steps were part of earlier BOTS v1 material, but the supporting data/events are no longer present in the current dataset.  
 👉 They have been intentionally skipped in this walkthrough.
 
