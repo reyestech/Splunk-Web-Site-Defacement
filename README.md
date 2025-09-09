@@ -23,7 +23,9 @@
 ---
 
 # **Scenario**
-Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation’s CEO) was compromised.
+Today is Alice's first day at Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her the first assignment: A memo from the Gotham City Police Department (GCPD). GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. 
+
+The group has multiple objectives, but a key aspect of their modus operandi is defacing websites to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com (the personal blog of Wayne Corporation's CEO) was compromised.
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/c7dbd84b-bb05-4232-8487-1be38496a473" width="70%" alt="image"/>
@@ -34,17 +36,16 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
 # **INTRO TO THE DEFACEMENT** 
 ## **Your Assignment (Objectives)**  
 Your primary goal is to conduct a thorough investigation into the suspected defacement of the website imreallynotbatman.com. This includes establishing the extent of the impact, determining the exact timing of the incident, and mapping out the attacker's route and infrastructure. To effectively monitor for future threats, you are expected to produce Indicators of Compromise (IoCs) and develop a repeatable set of searches and alerts.
-
-1. **Artifact Confirmation**: Confirm the alteration of the defaced JPEG on the website and document the date and time of the incident.
-2. **Activity Analysis**:   Investigate any prior scanning activity and examine the website's CMS or tech stack, focusing on potential upload or authentication routes used by the attacker.
-3. **Attribution of Findings**: Use signals like dynamic DNS, FQDNs, source IPs, and filenames to help identify the attacker’s profile and infrastructure.
-4. **Brute-Force Activity Quantification**: Assess any brute-force attempts, noting time frames of credential successes to identify exploited patterns.
-5. **Packaging of Findings**: Compile your findings into a resource package that includes detection methods, containment actions, and recommendations for strengthening website security.
+1. **Artifact Confirmation**: Confirm that a visible artifact was altered (defacement JPEG) and when.
+2. **Activity Analysis**: Identify scanning activity, CMS/stack, and suspected upload/auth routes.
+3. **Attribution of Findings**: Use signals like dynamic DNS, FQDNs, source IPs, and filenames to identify the attacker's profile and infrastructure.
+4. **Brute-Force Activity Quantification**: Quantify brute-force activity and credential success windows.
+5. **Packaging of Findings**: Compile your findings into a resource package that includes detections, containment actions, and hardening guidance.
 
 ## **Evidence Artifacts**  
 The following artifacts are crucial in establishing context and providing a timeline to anchor your Splunk pivots during the investigation:
 - **GCPD memo (Po1s0n1vy):** https://botscontent.netlify.app/v1/gcpd-poisonivy-memo.html  
-- **Alice’s journal (Sep 1–13, 2016):** https://botscontent.netlify.app/v1/alice-journal.html  
+- **Alice's journal (Sep 1–13, 2016):** https://botscontent.netlify.app/v1/alice-journal.html  
 - **Pastebin tip (defacement claim):** `http://pastebin.com/Gw6dWjS9`  
 
 ---
@@ -53,7 +54,7 @@ The following artifacts are crucial in establishing context and providing a time
 To prepare for your investigation, I have staged the environment and configured Splunk for targeted hunts. This involved pivoting through HTTP/IDS data and authentication signals to both confirm the defacement and trace its root cause.
 
 **Preparation (Evidence Review)**:  
-- Begin by skimming through the **GCPD memo** + **Alice’s journal** to establish a cohesive timeframe and identify any potential suspects involved in the incident.  
+- Begin by skimming through the **GCPD memo** + **Alice's journal** to establish a cohesive timeframe and identify any potential suspects involved in the incident.  
 - Document candidate IoCs, including IP addresses, fully qualified domain names (FQDNs), filenames, and hashes, to facilitate swift searches throughout your analysis.  
 - Create a plan for subsequent pivots, focusing on various elements such as HTTP content types, user agents, POST/upload paths, and bursts of authentication attempts to uncover any suspicious activities.
 
