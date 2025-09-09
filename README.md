@@ -72,15 +72,15 @@ To prepare for your investigation, I have staged the environment and configured 
 
 ### 📦 Tools Reference 
 
-| Category     | Tool / Feature             | Purpose                                              |
-| ------------ | -------------------------- | ---------------------------------------------------- |
-| SIEM         | Splunk                     | Security Information and Event Management (SIEM)     |
-| Sandbox      | Windows Sandbox            | Isolated Windows test environment                    |
-| Sandbox      | Sandboxie-Plus             | Lightweight application sandboxing                   |
-| Threat Intel | VirusTotal                 | Multi-engine malware scanning and file/URL analysis  |
-| Threat Intel | AlienVault OTX             | Threat intelligence and community-shared indicators  |
-| Hash/Regex   | md5decrypt                 | Online MD5 hash lookup / cracking                    |
-| Hash/Regex   | RegEx (Regular Expressions)| Pattern matching and data extraction                 |
+| **Category**     | **Tool / Feature**         | **Purpose**                                          |
+| ---------------- | -------------------------- | ---------------------------------------------------- |
+| **SIEM**         | Splunk                     | Security Information and Event Management (SIEM)     |
+| **Sandbox**      | Windows Sandbox            | Isolated Windows test environment                    |
+| **Sandbox**      | Sandboxie-Plus             | Lightweight application sandboxing                   |
+| **Threat Intel** | VirusTotal                 | Multi-engine malware scanning and file/URL analysis  |
+| **Threat Intel** | AlienVault OTX             | Threat intelligence and community-shared indicators  |
+| **Hash/Regex**   | md5decrypt                 | Online MD5 hash lookup / cracking                    |
+| **Hash/Regex**   | RegEx (Regular Expressions)| Pattern matching and data extraction                 |
 
 ---
 
@@ -529,36 +529,35 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form
 ---
 
 ## 🔄 **Recap — Step by Step**
-| Phase                  | Implementation                                             | Purpose                                  |
-| --------------------- | ---------------------------------------------------------- | ---------------------------------------- |
-| Bound the Window      | Mark first complaint + last known-good render              | Keep searches tight and relevant         |
-| Surface Scanners      | Find noisy sources probing the domain                      | Identify likely entry/pressure points    |
-| Fingerprint the Stack | Confirm CMS/tech (e.g., Joomla)                            | Narrow vuln paths & admin/upload areas   |
-| Prove Defacement      | Locate altered artifact + exact change time                | Validate impact and anchor the timeline  |
-| Pivot to POSTs/Uploads| Trace requests right before change; inspect form data      | Reveal upload vectors and abused routes  |
-| Auth Precursors       | Detect failed → success bursts / credential stuffing       | Tie credential misuse to the compromise  |
-| Map Attacker Infra    | Extract dynamic-DNS FQDNs + staging IPs                    | Attribute infra; expand IoCs             |
-| Tie to Victim Host    | Confirm destination IP serving defaced content             | Link activity to affected hosts          |
-| Collect IoCs & Evidence | Capture IPs, UAs, filenames, hashes, screenshots        | Support containment & post-mortems       |
-| Contain & Recover     | Block IoCs, restore clean files, rotate credentials        | Stop activity and return to good state   |
-| Harden                | WAF/rate limits, restrict uploads/admin, tune FIM          | Reduce recurrence & shrink attack surface|
-| Operationalize        | Save searches, alerts/dashboards, document runbook         | Make response repeatable and faster      |
+| **Phase                     | **Implementation**                                    | **Purpose**                               |
+| --------------------------- | ----------------------------------------------------- | ----------------------------------------- |
+| **Bound the Window**        | Mark first complaint + last known-good render         | Keep searches tight and relevant          |
+| **Surface Scanners**        | Find noisy sources probing the domain                 | Identify likely entry/pressure points     |
+| **Fingerprint the Stack**   | Confirm CMS/tech (e.g., Joomla)                       | Narrow vuln paths & admin/upload areas    |
+| **Prove Defacement**        | Locate altered artifact + exact change time           | Validate impact and anchor the timeline   |
+| **Pivot to POSTs/Uploads**  | Trace requests right before change; inspect form data | Reveal upload vectors and abused routes   |
+| **Auth Precursors**         | Detect failed → success bursts / credential stuffing  | Tie credential misuse to the compromise   |
+| **Map Attacker Infra**      | Extract dynamic-DNS FQDNs + staging IPs               | Attribute infra; expand IoCs              |
+| **Tie to Victim Host**      | Confirm destination IP serving defaced content        | Link activity to affected hosts           |
+| **Collect IoCs & Evidence** | Capture IPs, UAs, filenames, hashes, screenshots      | Support containment & post-mortems        |
+| **Contain & Recover**       | Block IoCs, restore clean files, rotate credentials   | Stop activity and return to good state    |
+| **Harden**                  | WAF/rate limits, restrict uploads/admin, tune FIM     | Reduce recurrence & shrink attack surface |
+| **Operationalize**          | Save searches, alerts/dashboards, document runbook    | Make response repeatable and faster       |
 
 ---
 
 ## 📚 **Lessons Learned**
-- [ ] **Visibility triad wins:** Web + Auth + FIM/IDS together told the full story.
-     - File integrity, HTTP, and authentication logs, together, told the whole story - individually, they fell short.
-- [ ] **Correlation over single signals:** Small clues become decisive when chained.
-   - A stray JPEG, a brute-force login spike, or a POST to an upload path may mean little alone, but they become decisive when correlated.
-- [ ] **Repeatability wins:** Turn ad-hoc queries into alerts/dashboards to cut toil.
-   - Turning one-off queries into alerts and dashboards is how IR teams scale from reactive to proactive.
-- [ ] **Context elevates detections:** VirusTotal lookups + decoded artifacts increase confidence.
-   - Pivoting to VirusTotal and decoding artifacts sharpened attribution and raised confidence in the findings.
-- [ ] **Evidence discipline:** IoCs + screenshots enable clean handoffs and audits.
-    - Capturing IoCs and screenshots made the investigation auditable and ready for handoff.
+1. **Visibility triad wins:** Web + Auth + FIM/IDS together told the full story.
+   - [ ] `File integrity, HTTP, and authentication logs, together, told the whole story - individually, they fell short.`
+2. **Correlation over single signals:** Small clues become decisive when chained.
+   - [ ] `A stray JPEG, a brute-force login spike, or a POST to an upload path may mean little alone, but they become decisive when correlated.`
+3. **Repeatability wins:** Turn ad-hoc queries into alerts/dashboards to cut toil.
+   - [ ] `Turning one-off queries into alerts and dashboards is how IR teams scale from reactive to proactive.`
+4. **Context elevates detections:** VirusTotal lookups + decoded artifacts increase confidence.
+   - [ ] `Pivoting to VirusTotal and decoding artifacts sharpened attribution and raised confidence in the findings.`
+5. **Evidence discipline:** IoCs + screenshots enable clean handoffs and audits.
+   - [ ] `Capturing IoCs and screenshots made the investigation auditable and ready for handoff.`
 
-<img width="392" height="558" alt="image" src="https://github.com/user-attachments/assets/dca220e9-9d45-4217-8b67-d8d35991f64a" />
 
 ---
 
