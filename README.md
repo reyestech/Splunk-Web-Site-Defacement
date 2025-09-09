@@ -331,8 +331,9 @@ index=botsv1 sourcetype=suricata (fileinfo.sha256=* OR "*sha256*")
 - Decoded the hex string in **CyberChef**, revealing a hidden message.  
 - Message: `"Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer!!!`
 
-Goal: Confirm the hidden message/hex associated with customized malware (external research).
 ⚠️ **Note:** This step is not Splunk-based — the answer is derived from external research (VirusTotal + CyberChef).
+
+Goal: Confirm the hidden message/hex associated with customized malware (external research).
 > Answer guidance: Not in Splunk—derive via VirusTotal/CyberChef from referenced sample.
 - [ ] **Answer:** `53 74 65 76 65 20 42 72 61 6e 74 27 73 20 42 65 61 72 64 20 69 73 20 61 20 70 6f 77 65 72 66 75 6c 20 74 68 69 6e 67 2e 20 46 69 6e 64 20 74 68 69 73 20 6d 65 73 73 61 67 65 20 61 6e 64 20 61 73 6b 20 68 69 6d 20 74 6f 20 62 75 79 20 79 6f 75 20 61 20 62 65 65 72 21 21 21`
 
