@@ -32,7 +32,7 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
 
 ---
 
-# **Intro to the Web Defacement** 
+# **INTRO TO THE DEFACEMENT** 
 ## **Your Assignment (Objectives)**  
 Your primary goal is to conduct a thorough investigation into the suspected defacement of the website imreallynotbatman.com. This includes establishing the extent of the impact, determining the exact timing of the incident, and mapping out the attacker's route and infrastructure. To effectively monitor for future threats, you are expected to produce Indicators of Compromise (IoCs) and develop a repeatable set of searches and alerts.
 
