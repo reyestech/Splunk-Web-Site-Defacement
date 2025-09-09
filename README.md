@@ -29,7 +29,6 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
   <img src="https://github.com/user-attachments/assets/c7dbd84b-bb05-4232-8487-1be38496a473" width="70%" alt="image"/>
 </div>
 
-
 ---
 
 # **INTRO TO THE DEFACEMENT** 
