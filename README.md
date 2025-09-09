@@ -93,6 +93,7 @@ What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imr
 - index=”botsv1” *poisonivy
 
 Goal: Fingerprint CMS/stack to narrow vuln paths (e.g., /administrator/, templates).
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http imreallynotbatman.com
@@ -124,6 +125,7 @@ What company created the web vulnerability scanner used by Po1s0n1vy? Type the c
 - We continue looking through the “INTERESTING FIELDS” on the left side, in Src_header, which has Po1s0n1vy/40.80.148.42 traffic using a network vulnerability scanner, Acunetix. `Picture 1.5`
 
 Goal: Confirm which scanner/vendor hit the site.
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http imreallynotbatman.com
@@ -149,6 +151,7 @@ What content management system is imreallynotbatman.com likely using?
 - Using Ctrl F, we found imreallynotbatman.com is using Joomla when we expanded the src_headers.
 
 Goal: Fingerprint CMS/stack to narrow vuln paths (e.g., /administrator/, templates).
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http imreallynotbatman.com
@@ -169,6 +172,7 @@ What is the name of the file that defaced the imreallynotbatman.com website? Ple
 
 Goal: Prove defacement by locating the altered artifact and its filename/time.
 > Answer guidance: For example, "notepad.exe" or "favicon.ico"
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (content_type="image/jpeg" OR uri="*.jpg" OR uri="*.jpeg")
@@ -193,6 +197,7 @@ This attack utilized dynamic DNS to resolve the malicious IP address. What fully
 - In the same JPEG image file, you can see the FQDN prankglassinebracket.jumpingcrab.com. `Picture 2.0`
 
 Goal: Extract the dynamic-DNS FQDN tied to the attacker's infrastructure.
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (http.referer=* OR referer=*)
@@ -216,6 +221,7 @@ What IPv4 address is likely attempting a brute-force password attack against imr
 - Enter Search: index="botsv1" sourcetype="stream:HTTP" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd*
 
 Goal: Identify the IP likely running brute-force POSTs against the site.
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http http_method=POST dest_ip=192.168.250.70
@@ -242,6 +248,7 @@ What IPv4 address is likely attempting a brute-force password attack against imr
 - Enter Search: index="botsv1" sourcetype="stream:HTTP" http_method="POST" dest_ip="192.168.250.70" form_data=*username*passwd*
 
 Goal: Re-validate the brute-force source IP around the POST attempts.
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http http_method=POST dest_ip=192.168.250.70 form_data=*username*passwd*
@@ -264,6 +271,7 @@ What is the name of the executable uploaded by Po1s0n1vy?
 
 Goal: Find the executable uploaded prior to defacement.
 > Answer guidance: Include the extension (e.g., `notepad.exe` or `favicon.ico`).
+
 **SPL**
 ```
 index=botsv1 sourcetype=suricata dest_ip=192.168.250.70 http.http_method=POST ".exe"
@@ -286,6 +294,7 @@ What is the MD5 hash of the executable uploaded?
 - The command "|stats values (MD5)" inputs the IP and sees its traffic to verify the details.
 
 Goal: Collect hash evidence for enrichment and blocking.
+
 **SPL**
 ```
 index=botsv1 sourcetype=suricata dest_ip=192.168.250.70 http.http_method=POST ".exe"
@@ -308,6 +317,7 @@ GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1
 - We can use tools like Virustotal.com to scan the attacker's IP address. This allows us to see the SHA256 found under basic properties.
 
 Goal: Enrich with external intel to confirm related malware and infrastructure.
+
 **SPL**
 ```
 index=botsv1 sourcetype=suricata (fileinfo.sha256=* OR "*sha256*")
@@ -322,8 +332,8 @@ index=botsv1 sourcetype=suricata (fileinfo.sha256=* OR "*sha256*")
 ---
 
 ## Defacement Step 112 — Let’s Buy Steve a Beer (Hidden Hex Message)
-
-**Goal:** Confirm the hidden hex message associated with the customized malware sample from Step 111.  
+Goal: Confirm the hidden message/hex associated with customized malware (external research).
+> Answer guidance: Not in Splunk - derive via VirusTotal/CyberChef from referenced sample.
 
 **Process:**
 - Pulled attacker’s malware sample metadata from VirusTotal.  
@@ -333,8 +343,6 @@ index=botsv1 sourcetype=suricata (fileinfo.sha256=* OR "*sha256*")
 
 ⚠️ **Note:** This step is not Splunk-based — the answer is derived from external research (VirusTotal + CyberChef).
 
-Goal: Confirm the hidden message/hex associated with customized malware (external research).
-> Answer guidance: Not in Splunk—derive via VirusTotal/CyberChef from referenced sample.
 - [ ] **Answer:** `53 74 65 76 65 20 42 72 61 6e 74 27 73 20 42 65 61 72 64 20 69 73 20 61 20 70 6f 77 65 72 66 75 6c 20 74 68 69 6e 67 2e 20 46 69 6e 64 20 74 68 69 73 20 6d 65 73 73 61 67 65 20 61 6e 64 20 61 73 6b 20 68 69 6d 20 74 6f 20 62 75 79 20 79 6f 75 20 61 20 62 65 65 72 21 21 21`
 
 
@@ -387,6 +395,7 @@ One of the passwords in the brute force attack is James Brodsky's favorite Coldp
 - Enter Search: index="botsv1" sourcetype=" stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | eval pwlen=len(userpassword) | search pwlen=6 | where userpassword in ("clocks", "oceans", "sparks", "shiver", "yellow") | table userpassword
 
 Goal: Identify a 6-character password used during the brute-force.
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -419,6 +428,7 @@ What was the correct password for admin access to the content management system 
 - Enter Search: index="botsv1" sourcetype="stream:http" http_method=POST dest_ip="192.168.250.70" form_data=*username*passwd* | rex field=form_data "passwd=(?<userpassword>\w+)" | rex field=form_data "passwd=(?<userpassword>\w+)" | stats count by userpassword
 
 Goal: Determine the most frequently used password seen in POSTs.
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -447,6 +457,7 @@ What was the average password length used in the password brute-forcing attempt?
 
 Goal: Measure average brute-force password length (round to nearest whole).
 > Answer guidance: Round to the closest whole integer. For example, "5" is not "5.23213"
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -476,6 +487,7 @@ How many seconds elapsed between when the brute force password scan identified t
 
 Goal: Time from password discovery to successful compromise.
 > Answer guidance: Round to two decimals (e.g., 92.17).
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -501,6 +513,7 @@ How many unique passwords were attempted in the brute force attempt?
 - Instead, in that query, we can go to the "Statistics" bar and see that there are 412 events in total.
 
 Goal: Count the distinct passwords used in the brute-force.
+
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
