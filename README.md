@@ -9,6 +9,10 @@
 ### Splunk IR Lab — Website Defacement: From Signal to Root Cause
 **Hector M. Reyes | Boss of the SOC** | `Date`
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/516a7c9d-ed7b-4567-9546-40909bd70e6c" width="50%" alt="1733695831697"/>
+</div>
+
 ### TL;DR
 - Confirmed **Po1s0n1vy** defacement of `imreallynotbatman.com` using Splunk SIEM data.
 - Traced attack chain: **Acunetix scan → CMS (Joomla) → brute-force POSTs → uploaded executable (3791.exe) → defacement JPEG + dynamic DNS**.
@@ -16,10 +20,6 @@
 
 **Key skills** 
 > SPL queries, web/HTTP log analysis, CMS fingerprinting, brute-force detection, threat-intel enrichment, and detection engineering.
-
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/516a7c9d-ed7b-4567-9546-40909bd70e6c" width="50%" alt="1733695831697"/>
-</div>
 
 ---
 
@@ -33,7 +33,7 @@ Today is Alice's first day at Wayne Enterprises' Security Operations Center. Luc
 
 ---
 
-# **Intro to the Web Defacement** ☠
+# **Intro to the Web Defacement** 
 ## **Your Assignment (Objectives)**  
 Your primary goal is to conduct a thorough investigation into the suspected defacement of the website imreallynotbatman.com. This includes establishing the extent of the impact, determining the exact timing of the incident, and mapping out the attacker's route and infrastructure. To effectively monitor for future threats, you are expected to produce Indicators of Compromise (IoCs) and develop a repeatable set of searches and alerts.
 
