@@ -165,10 +165,10 @@ index=botsv1 sourcetype=stream:http imreallynotbatman.com
 
 ## Defacement Step 104 — Find the Target File (defacement JPEG)
 What is the name of the file that defaced the imreallynotbatman.com website? Please submit only the file name with the extension.
-> Answer guidance: For example, "notepad.exe" or "favicon.ico"
 - In the field HTTP. When we see an HTTP content type of “image/jpeg”, we open it and see a .jpeg file associated with it. 
 
 Goal: Prove defacement by locating the altered artifact and its filename/time.
+> Answer guidance: For example, "notepad.exe" or "favicon.ico"
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (content_type="image/jpeg" OR uri="*.jpg" OR uri="*.jpeg")
@@ -192,7 +192,7 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (content_type="image/
 This attack utilized dynamic DNS to resolve the malicious IP address. What fully qualified domain name (FQDN) is associated with this attack? <br /> 
 - In the same JPEG image file, you can see the FQDN prankglassinebracket.jumpingcrab.com. `Picture 2.0`
 
-Goal: Extract the dynamic-DNS FQDN tied to the attacker infra.
+Goal: Extract the dynamic-DNS FQDN tied to the attacker's infrastructure.
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 (http.referer=* OR referer=*)
@@ -258,13 +258,12 @@ index=botsv1 sourcetype=stream:http http_method=POST dest_ip=192.168.250.70 form
 
 ## Defacement Step 109 — Filenames (uploaded executable)
 What is the name of the executable uploaded by Po1s0n1vy?
-> Answer guidance: Please include the file extension. (For example, "notepad.exe" or "favicon.ico")
 - Since we already have Po1s0n1vy's network traffic, we can filter it by adding ".exe" to our index.
 - We find 3791.exe in the "fileinfo. Filename. " When we open it, we see that Po1s0n1vy uploaded it.
 - Enter Search: index="botsv1" sourcetype="suricata" dest_ip="192.168.250.70" http.http_method=POST .exe
 
 Goal: Find the executable uploaded prior to defacement.
-Answer guidance: Include the extension (e.g., `notepad.exe` or `favicon.ico`).
+> Answer guidance: Include the extension (e.g., `notepad.exe` or `favicon.ico`).
 **SPL**
 ```
 index=botsv1 sourcetype=suricata dest_ip=192.168.250.70 http.http_method=POST ".exe"
@@ -308,7 +307,7 @@ index=botsv1 sourcetype=suricata dest_ip=192.168.250.70 http.http_method=POST ".
 GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if the initial compromise fails, are to send a spear phishing email with custom malware attached to their intended target. This malware is typically associated with Po1s0n1vys' initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
 - We can use tools like Virustotal.com to scan the attacker's IP address. This allows us to see the SHA256 found under basic properties.
 
-Goal: Enrich with external intel to confirm related malware and infra.
+Goal: Enrich with external intel to confirm related malware and infrastructure.
 **SPL**
 ```
 index=botsv1 sourcetype=suricata (fileinfo.sha256=* OR "*sha256*")
@@ -325,18 +324,16 @@ index=botsv1 sourcetype=suricata (fileinfo.sha256=* OR "*sha256*")
 ## Defacement Step 112 — Let’s Buy Steve a Beer (Hidden Hex Message)
 
 **Goal:** Confirm the hidden hex message associated with the customized malware sample from Step 111.  
-> ⚠️ **Note:** This step is not Splunk-based — the answer is derived from external research (VirusTotal + CyberChef).
 
 **Process:**
 - Pulled attacker’s malware sample metadata from VirusTotal.  
 - Used **Ctrl+F** to locate relevant hex codes tied to the `botsv1` sample.  
 - Decoded the hex string in **CyberChef**, revealing a hidden message.  
-- Message: `"Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer!!!"`
+- Message: `"Steve Brant's Beard is a powerful thing. Find this message and ask him to buy you a beer!!!`
 
 Goal: Confirm the hidden message/hex associated with customized malware (external research).
-Answer guidance: Not in Splunk—derive via VirusTotal/CyberChef from referenced sample.
-**Answer guidance:** Provide the raw hex string (include spacing).
-
+> Answer guidance: Not in Splunk—derive via VirusTotal/CyberChef from referenced sample.
+> ⚠️ **Note:** This step is not Splunk-based — the answer is derived from external research (VirusTotal + CyberChef).
 - [ ] **Answer:** `53 74 65 76 65 20 42 72 61 6e 74 27 73 20 42 65 61 72 64 20 69 73 20 61 20 70 6f 77 65 72 66 75 6c 20 74 68 69 6e 67 2e 20 46 69 6e 64 20 74 68 69 73 20 6d 65 73 73 61 67 65 20 61 6e 64 20 61 73 6b 20 68 69 6d 20 74 6f 20 62 75 79 20 79 6f 75 20 61 20 62 65 65 72 21 21 21`
 
 
@@ -395,7 +392,7 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form
 | rex field=form_data "passwd=(?<password>\w+)"
 | eval pwlen=len(password)
 | search pwlen=6
-| where password IN ("yellow","shiver","sparks","clocks","oceans")
+| where password IN ("yellow", "shiver", "sparks", "clocks", "oceans")
 | dedup password
 | table password
 ```
@@ -442,14 +439,13 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form
 
 ## Defacement Step 117 — The Means 
 What was the average password length used in the password brute-forcing attempt?
-> Answer guidance: Round to the closest whole integer. For example, "5" is not "5.23213"
 - We are confident that we have all the necessary information in this index. We can start by organizing the data by using "| eval length=len(passwd) " and heading to the "length" in INTERESTING FIELDS. And we see an average of 6. `Pictures 3.4`
 - I also found that you can use "| eval length=len(passwd) " and "| stats avg(length)" in our query to get the integer. `Pictures 3.5`
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd
 - Enter Search: | rex field=form_data "passwd=(?<passwd>\w+)" | eval length=len(passwd) | stats avg(length)
 
 Goal: Measure average brute-force password length (round to nearest whole).
-Answer guidance: Return a whole number (e.g., 6).
+> Answer guidance: Round to the closest whole integer. For example, "5" is not "5.23213"
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
@@ -472,14 +468,13 @@ index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form
 
 ## Defacement Step 118 — Round Two (Seconds between “found correct password” and login)
 How many seconds elapsed between when the brute force password scan identified the correct password and the compromised login?
-> Answer guidance: Round to 2 decimal places.
 - Search for the password "batman" and filter the transaction and event durations.
 - We use a "| transaction userpassword| and "eval dur=round(duration, 2)." The "dur" field on the left shows 92.17.
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd | rex field=form_data "passwd=(?<passwd>\w+)" | search passwd=batman | transaction passwd | eval dur=round(duration, 2) | table dur
 - Enter Search: index=botsv1 imreallynotbatman.com sourcetype="stream:http" dest_ip="192.168.250.70" http_method="POST" username passwd | rex field=form_data "passwd=(?<passwd>\w+)" | search passwd=batman | transaction passwd | eval dur=round(duration, 2)
 
 Goal: Time from password discovery to successful compromise.
-Answer guidance: Round to two decimals (e.g., 92.17).
+> Answer guidance: Round to two decimals (e.g., 92.17).
 **SPL**
 ```
 index=botsv1 sourcetype=stream:http dest_ip=192.168.250.70 http_method=POST form_data=*username*passwd*
