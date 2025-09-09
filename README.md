@@ -4,8 +4,8 @@
 
 ---
 
-# Splunk: Website Defacement
-### Splunk IR Lab — Website Defacement: From Signal to Root Cause
+# Splunk SOC Lab: Website Defacement 
+### Splunk — Website Defacement: From Signal to Root Cause
 **Hector M. Reyes | Boss of the SOC** | `Date`
 
 <div align="center">
