@@ -33,7 +33,7 @@ The group has multiple objectives, but a key aspect of their modus operandi is d
 
 ---
 
-# **INTRO TO THE DEFACEMENT** 
+# **INTRO TO THE DEFACEMENT☠️** 
 ## **Your Assignment (Objectives)**  
 Your primary goal is to conduct a thorough investigation into the suspected defacement of the website imreallynotbatman.com. This includes establishing the extent of the impact, determining the exact timing of the incident, and mapping out the attacker's route and infrastructure. To effectively monitor for future threats, you are expected to produce Indicators of Compromise (IoCs) and develop a repeatable set of searches and alerts.
 1. **Artifact Confirmation**: Confirm that a visible artifact was altered (defacement JPEG) and when.
