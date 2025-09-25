@@ -6,7 +6,7 @@
 
 # Splunk SOC Lab: Website Defacement 
 ### Splunk — Website Defacement: From Signal to Root Cause
-Hector M. Reyes | Cybersecurity Analyst | Boss of the SOC
+Hector M. Reyes | Cybersecurity Analyst | Boss of the SOC Update
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/516a7c9d-ed7b-4567-9546-40909bd70e6c" width="50%" alt="1733695831697"/>
